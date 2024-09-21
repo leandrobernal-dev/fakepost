@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import NextImage from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,123 +14,13 @@ import {
   Mic,
   Send,
   Smile,
-  PlusCircle,
   Menu,
   Square,
   ChevronLeft,
 } from "lucide-react";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 
-export default function MessengerUI() {
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      text: "Hey there! How's it going?",
-      sent: false,
-      reactions: [{ emoji: "👍", count: 1 }],
-    },
-    {
-      id: 2,
-      text: "Hi! I'm doing well, thanks. How about you?",
-      sent: true,
-      reactions: [],
-    },
-    {
-      id: 3,
-      text: "I'm good too. Did you see the photo I sent earlier?",
-      sent: false,
-      reactions: [],
-    },
-    {
-      id: 4,
-      text: "Yes, it looks great! Where was that taken?",
-      sent: true,
-      reactions: [{ emoji: "😍", count: 1 }],
-      replyTo: 3,
-    },
-    {
-      id: 5,
-      image:
-        "https://i.pinimg.com/564x/ca/eb/d6/caebd678eb248dcfb4bade49db3deb63.jpg",
-      sent: false,
-      reactions: [{ emoji: "❤️", count: 2 }],
-      text: "",
-    },
-    {
-      id: 52,
-      image:
-        "https://i.pinimg.com/564x/00/2d/05/002d05676a7d33028c1679e54d156d3b.jpg",
-      sent: true,
-      reactions: [{ emoji: "❤️", count: 2 }],
-      text: "",
-    },
-    {
-      id: 6,
-      text: "It was taken at the new park downtown. We should visit sometime!",
-      sent: false,
-      reactions: [],
-    },
-    {
-      id: 7,
-      text: "That sounds great! Let me know when you're free.",
-      sent: true,
-      reactions: [],
-    },
-    {
-      id: 8,
-      text: "I'm good to go either this weekend or next.",
-      sent: false,
-      reactions: [],
-    },
-    {
-      id: 9,
-      text: "Awesome! Let's plan on next weekend then.",
-      sent: true,
-      reactions: [],
-    },
-    {
-      id: 10,
-      text: "Sounds good to me. What time were you thinking?",
-      sent: false,
-      reactions: [],
-    },
-    {
-      id: 11,
-      text: "How about 2 PM?",
-      sent: true,
-      reactions: [],
-    },
-    {
-      id: 12,
-      text: "That works for me. See you then!",
-      sent: false,
-      reactions: [],
-    },
-    {
-      id: 13,
-      text: "Looking forward to it!",
-      sent: true,
-      reactions: [],
-    },
-    {
-      id: 14,
-      text: "Me too!",
-      sent: false,
-      reactions: [],
-    },
-    {
-      id: 15,
-      text: "I just realized I have a conflict. Can we reschedule?",
-      sent: true,
-      reactions: [],
-    },
-    {
-      id: 16,
-      text: "Aww, sorry to hear that. When are you free now?",
-      sent: false,
-      reactions: [],
-    },
-  ]);
+export default function MessengerUI({ messages }) {
   const [newMessage, setNewMessage] = useState("");
 
   const sendMessage = () => {
@@ -150,7 +41,10 @@ export default function MessengerUI() {
   const getMessageById = (id) => messages.find((m) => m.id === id);
 
   return (
-    <div className="flex aspect-[9/16] max-w-lg scale-75 flex-col bg-black">
+    <div
+      id="html-section"
+      className="flex aspect-[9/16] w-full max-w-sm flex-col bg-black"
+    >
       <div className="flex items-center justify-between p-1 px-4 text-[#e4e6eb]">
         <div className="flex items-center">
           <span className="mr-2 text-sm">10:45</span>
@@ -184,7 +78,11 @@ export default function MessengerUI() {
           <Info className="h-6 w-6" />
         </Button>
       </div>
-      <div className="no-scrollbar flex-1 space-y-4 overflow-y-auto p-4">
+
+      <div
+        id="messages-section"
+        className={`no-scrollbar flex-1 space-y-4 overflow-y-auto p-4`}
+      >
         {messages.map((message) => (
           <div
             key={message.id}
@@ -203,7 +101,11 @@ export default function MessengerUI() {
                 </div>
               )}
               {message.image && (
-                <img
+                <NextImage
+                  width={200}
+                  height={200}
+                  quality={100}
+                  priority
                   src={message.image}
                   alt="Sent image"
                   className="mb-2 rounded-lg"
