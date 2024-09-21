@@ -1,0 +1,5 @@
+Features
+
+* change chat app with light and dark themes
+* download image + cropping
+*
