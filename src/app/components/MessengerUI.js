@@ -44,9 +44,11 @@ export default function MessengerUI({ messages, data, setData }) {
           <h1 className="text-lg font-semibold text-[#e4e6eb]">
             {data.contactDetails.name}
           </h1>
-          <p className="text-sm text-[#b0b3b8]">
-            {data.contactDetails.statusText}
-          </p>
+          {data.contactDetails.active && (
+            <p className="text-sm text-[#b0b3b8]">
+              {data.contactDetails.statusText}
+            </p>
+          )}
         </div>
         <Button variant="ghost" size="icon" className="text-[#e4e6eb]">
           <Phone className="h-6 w-6" />
