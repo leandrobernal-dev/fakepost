@@ -1,11 +1,18 @@
 "use client";
 
+import Menu from "@/app/components/Menu";
 import MessengerUI from "@/app/components/MessengerUI";
 import { Button } from "@/components/ui/button";
 import { toPng } from "html-to-image";
 import { useState } from "react";
 
 export default function Home() {
+  const [phoneSettings, setPhoneSettings] = useState({
+    battery: 4,
+    time: "10:45",
+    wifi: 100,
+    cellular: 50,
+  });
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -164,11 +171,12 @@ export default function Home() {
       <nav className="h-16"></nav>
       <div className="flex justify-center">
         <main className="grid w-full max-w-4xl grid-cols-2 gap-4 rounded-md bg-zinc-900 p-4">
-          <div>
-            <Button onClick={captureImage}>Download</Button>
-          </div>
+          <Menu
+            phoneSettings={phoneSettings}
+            setPhoneSettings={setPhoneSettings}
+          />
           <div className="flex justify-center">
-            <MessengerUI messages={messages} />
+            <MessengerUI messages={messages} phoneSettings={phoneSettings} />
           </div>
         </main>
       </div>

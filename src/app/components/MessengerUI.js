@@ -19,8 +19,9 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
+import PhoneDetails from "@/app/components/PhoneDetails";
 
-export default function MessengerUI({ messages }) {
+export default function MessengerUI({ messages, phoneSettings }) {
   const [newMessage, setNewMessage] = useState("");
 
   const sendMessage = () => {
@@ -45,17 +46,7 @@ export default function MessengerUI({ messages }) {
       id="html-section"
       className="flex aspect-[9/16] w-full max-w-sm flex-col bg-black"
     >
-      <div className="flex items-center justify-between p-1 px-4 text-[#e4e6eb]">
-        <div className="flex items-center">
-          <span className="mr-2 text-sm">10:45</span>
-        </div>
-        <div className="flex items-center">
-          <span className="mr-1 h-2 w-2 rounded-full bg-[#e4e6eb]"></span>
-          <span className="mr-1 h-2 w-2 rounded-full bg-[#e4e6eb]"></span>
-          <span className="mr-2 h-2 w-2 rounded-full bg-[#e4e6eb]"></span>
-          <span className="text-sm">100%</span>
-        </div>
-      </div>
+      <PhoneDetails phoneSettings={phoneSettings} />
       <div className="flex items-center border-b border-[#3a3b3c] p-3">
         <Button variant="ghost" size="icon" className="mr-2 text-[#e4e6eb]">
           <ArrowLeft className="h-6 w-6" />
