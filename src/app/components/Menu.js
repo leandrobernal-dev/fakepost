@@ -48,6 +48,7 @@ export default function Menu({ data, setData }) {
 
     toPng(nodeClone, {
       pixelRatio: downloadQuality,
+      includeQueryParams: true,
     })
       .then((dataUrl) => {
         const link = document.createElement("a");
