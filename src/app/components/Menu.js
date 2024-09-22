@@ -1,9 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
-import { RadioGroup } from "@radix-ui/react-radio-group";
+import { Switch } from "@/components/ui/switch";
 import { BatteryIcon, Clock, SignalIcon, WifiIcon } from "lucide-react";
 
 export default function Menu({ data, setData }) {
@@ -136,23 +134,13 @@ export default function Menu({ data, setData }) {
           </div>
 
           <div className="space-y-2">
-            <Label>Status</Label>
-            <RadioGroup
-              value={data.contactDetails.status}
-              onValueChange={(value) => setContactDetails("status", value)}
+            <Label>Active Status</Label>
+            <Switch
+              checked={data.contactDetails.active}
+              onCheckedChange={(value) => setContactDetails("active", value)}
               className="flex space-x-4"
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="Active" id="active" />
-                <Label htmlFor="active">Active</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="Inactive" id="inactive" />
-                <Label htmlFor="inactive">Inactive</Label>
-              </div>
-            </RadioGroup>
+            />
           </div>
-
           <div className="space-y-2">
             <Label htmlFor="statusText">Status Text</Label>
             <Input
