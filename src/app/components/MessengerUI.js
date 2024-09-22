@@ -21,7 +21,7 @@ import {
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import PhoneDetails from "@/app/components/PhoneDetails";
 
-export default function MessengerUI({ messages, phoneSettings }) {
+export default function MessengerUI({ messages, data, setData }) {
   const [newMessage, setNewMessage] = useState("");
 
   const sendMessage = () => {
@@ -29,7 +29,7 @@ export default function MessengerUI({ messages, phoneSettings }) {
       setMessages([
         ...messages,
         {
-          id: messages.length + 1,
+          id: data.messages.length + 1,
           text: newMessage,
           sent: true,
           reactions: [],
@@ -39,14 +39,14 @@ export default function MessengerUI({ messages, phoneSettings }) {
     }
   };
 
-  const getMessageById = (id) => messages.find((m) => m.id === id);
+  const getMessageById = (id) => data.messages.find((m) => m.id === id);
 
   return (
     <div
       id="html-section"
       className="flex aspect-[9/16] w-full max-w-sm flex-col bg-black"
     >
-      <PhoneDetails phoneSettings={phoneSettings} />
+      <PhoneDetails phoneSettings={data.phoneSettings} />
       <div className="flex items-center border-b border-[#3a3b3c] p-3">
         <Button variant="ghost" size="icon" className="mr-2 text-[#e4e6eb]">
           <ArrowLeft className="h-6 w-6" />
@@ -56,8 +56,12 @@ export default function MessengerUI({ messages, phoneSettings }) {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div className="ml-3 flex-1">
-          <h1 className="text-lg font-semibold text-[#e4e6eb]">Contact Name</h1>
-          <p className="text-sm text-[#b0b3b8]">Active now</p>
+          <h1 className="text-lg font-semibold text-[#e4e6eb]">
+            {data.contactDetails.name}
+          </h1>
+          <p className="text-sm text-[#b0b3b8]">
+            {data.contactDetails.statusText}
+          </p>
         </div>
         <Button variant="ghost" size="icon" className="text-[#e4e6eb]">
           <Phone className="h-6 w-6" />
@@ -74,7 +78,7 @@ export default function MessengerUI({ messages, phoneSettings }) {
         id="messages-section"
         className={`no-scrollbar flex-1 space-y-4 overflow-y-auto p-4`}
       >
-        {messages.map((message) => (
+        {data.messages.map((message) => (
           <div
             key={message.id}
             className={`flex ${message.sent ? "justify-end" : "justify-start"}`}
@@ -200,7 +204,7 @@ export default function MessengerUI({ messages, phoneSettings }) {
         </Button>
       </div>
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
-        {messages.map((message) => (
+        {data.messages.map((message) => (
           <div
             key={message.id}
             className={`flex ${message.sent ? "justify-end" : "justify-start"}`}
