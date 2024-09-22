@@ -90,7 +90,7 @@ export default function Menu({ data, setData }) {
           <AccordionTrigger className="px-8 py-4 font-bold text-white hover:bg-zinc-700">
             Phone Settings
           </AccordionTrigger>
-          <AccordionContent className="bg-zinc-800 px-8 py-6 text-white">
+          <AccordionContent className="px-8 py-6 text-white">
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label
@@ -189,7 +189,7 @@ export default function Menu({ data, setData }) {
           <AccordionTrigger className="px-8 py-4 font-bold text-white hover:bg-zinc-700">
             Contact Details
           </AccordionTrigger>
-          <AccordionContent className="bg-zinc-800 px-8 py-6 text-white">
+          <AccordionContent className="px-8 py-6 text-white">
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
@@ -264,7 +264,7 @@ export default function Menu({ data, setData }) {
           <AccordionTrigger className="px-8 py-4 font-bold text-white hover:bg-zinc-700">
             Messages
           </AccordionTrigger>
-          <AccordionContent className="bg-zinc-800 px-8 py-6 text-white">
+          <AccordionContent className="p-2 text-white">
             <MessagesForm data={data} setData={setData} />
           </AccordionContent>
         </AccordionItem>
