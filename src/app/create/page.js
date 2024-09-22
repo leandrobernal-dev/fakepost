@@ -118,7 +118,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 overflow-auto">
         <header className="sticky top-0 z-10 border-b bg-black px-4 py-3 lg:hidden">
           <div className="flex items-center justify-between">
             <Link
