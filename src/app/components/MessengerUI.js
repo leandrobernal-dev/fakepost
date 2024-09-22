@@ -24,21 +24,6 @@ import PhoneDetails from "@/app/components/PhoneDetails";
 export default function MessengerUI({ messages, data, setData }) {
   const [newMessage, setNewMessage] = useState("");
 
-  const sendMessage = () => {
-    if (newMessage.trim()) {
-      setMessages([
-        ...messages,
-        {
-          id: data.messages.length + 1,
-          text: newMessage,
-          sent: true,
-          reactions: [],
-        },
-      ]);
-      setNewMessage("");
-    }
-  };
-
   const getMessageById = (id) => data.messages.find((m) => m.id === id);
 
   return (
@@ -143,18 +128,12 @@ export default function MessengerUI({ messages, data, setData }) {
             className="flex-1 border-none bg-transparent text-[#e4e6eb] placeholder-[#b0b3b8] focus:ring-0"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && sendMessage()}
           />
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
             <Smile className="h-6 w-6" />
           </Button>
           {newMessage ? (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-[#0084ff]"
-              onClick={sendMessage}
-            >
+            <Button variant="ghost" size="icon" className="text-[#0084ff]">
               <Send className="h-6 w-6" />
             </Button>
           ) : (
