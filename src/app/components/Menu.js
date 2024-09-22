@@ -1,3 +1,4 @@
+import MessagesForm from "@/app/components/MessagesForm";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
@@ -153,6 +154,11 @@ export default function Menu({ data, setData }) {
             />
           </div>
         </div>
+      </div>
+
+      <div className="w-full max-w-md rounded-lg bg-zinc-800 p-8 shadow-xl">
+        <h2 className="mb-6 text-xl font-bold text-white">Messages</h2>
+        <MessagesForm data={data} setData={setData} />
       </div>
     </div>
   );
