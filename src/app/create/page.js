@@ -17,7 +17,7 @@ export default function Home() {
       name: "John Doe",
       image:
         "https://i.pinimg.com/564x/6a/6c/4e/6a6c4e8f6b0b7a7f7b8b3d6f5d1f6f6d.jpg",
-      status: "Active",
+      active: true,
       statusText: "Active Now",
     },
     messages: [
