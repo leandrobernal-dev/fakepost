@@ -20,32 +20,32 @@ export default function PhoneDetails({ phoneSettings }) {
       <div className="flex items-center">
         <span className="mr-2 text-sm">{phoneSettings.time}</span>
       </div>
-      <div className="flex items-center">
-        <span className="flex items-center text-sm">
+      <div className="flex items-end">
+        <span className="flex text-sm">
           {phoneSettings.wifi >= 75 ? (
-            <Wifi />
+            <Wifi className="w-4" />
           ) : phoneSettings.wifi >= 50 ? (
-            <WifiHigh />
+            <WifiHigh className="w-4" />
           ) : phoneSettings.wifi >= 25 ? (
-            <WifiLow />
+            <WifiLow className="w-4" />
           ) : (
-            <WifiZero />
+            <WifiZero className="w-4" />
           )}
         </span>
-        <span className="flex items-center text-sm">
+        <span className="flex text-sm">
           {phoneSettings.cellular >= 75 ? (
-            <SignalHigh />
+            <SignalHigh className="w-4" />
           ) : phoneSettings.cellular >= 50 ? (
-            <SignalMedium />
+            <SignalMedium className="w-4" />
           ) : phoneSettings.cellular >= 25 ? (
-            <SignalLow />
+            <SignalLow className="w-4" />
           ) : (
-            <SignalZero />
+            <SignalZero className="w-4" />
           )}
         </span>
-        <span className="flex items-center text-sm">
+        <span className="flex items-end text-sm">
           {phoneSettings.battery}%
-          <span className="ml-1">
+          <span className="ml-1 flex items-end">
             {phoneSettings.battery >= 75 ? (
               <BatteryFull />
             ) : phoneSettings.battery >= 50 ? (
