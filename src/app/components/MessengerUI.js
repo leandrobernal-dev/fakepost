@@ -29,12 +29,12 @@ export default function MessengerUI({ data }) {
   return (
     <div
       id="html-section"
-      className="flex aspect-[9/16] w-full max-w-sm flex-col bg-black"
+      className="flex aspect-[9/18] h-full max-w-sm flex-col bg-black"
     >
       <PhoneDetails phoneSettings={data.phoneSettings} />
-      <div className="flex items-center border-b border-[#3a3b3c] p-3">
+      <div className="flex items-center px-3 pb-2">
         <Button variant="ghost" size="icon" className="mr-2 text-[#e4e6eb]">
-          <ArrowLeft className="h-6 w-6" />
+          <ArrowLeft className="h-5 w-5" />
         </Button>
         <div className="relative">
           <Avatar className="h-10 w-10">
@@ -55,29 +55,29 @@ export default function MessengerUI({ data }) {
           )}
         </div>
         <div className="ml-3 flex-1">
-          <h1 className="text-lg font-semibold text-[#e4e6eb]">
+          <h1 className="text-md font-semibold text-[#e4e6eb]">
             {data.contactDetails.name}
           </h1>
           {data.contactDetails.active && (
-            <p className="text-sm text-[#b0b3b8]">
+            <p className="text-xs text-[#b0b3b8]">
               {data.contactDetails.statusText}
             </p>
           )}
         </div>
         <Button variant="ghost" size="icon" className="text-[#e4e6eb]">
-          <Phone className="h-6 w-6" />
+          <Phone className="h-5 w-5" />
         </Button>
         <Button variant="ghost" size="icon" className="text-[#e4e6eb]">
-          <VideoIcon className="h-6 w-6" />
+          <VideoIcon className="h-5 w-5" />
         </Button>
         <Button variant="ghost" size="icon" className="text-[#e4e6eb]">
-          <Info className="h-6 w-6" />
+          <Info className="h-5 w-5" />
         </Button>
       </div>
 
       <div
         id="messages-section"
-        className={`no-scrollbar flex-1 space-y-4 overflow-y-auto p-4`}
+        className={`no-scrollbar flex-1 space-y-8 overflow-y-auto p-4`}
       >
         {data.messages.map((message) => (
           <div
@@ -85,10 +85,12 @@ export default function MessengerUI({ data }) {
             className={`flex ${message.sent ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-[70%] rounded-2xl p-3 ${
-                message.sent
-                  ? "bg-[#0084ff] text-white"
-                  : "bg-[#3a3b3c] text-[#e4e6eb]"
+              className={`relative max-w-[70%] rounded-2xl p-2 ${
+                message.image
+                  ? ""
+                  : message.sent
+                    ? "bg-[#0084ff] text-white"
+                    : "bg-[#3a3b3c] text-[#e4e6eb]"
               }`}
             >
               {message.replyTo && (
@@ -104,18 +106,19 @@ export default function MessengerUI({ data }) {
                   priority
                   src={message.image}
                   alt="Sent image"
-                  className="mb-2 rounded-lg"
+                  className="rounded-xl"
                 />
               )}
               {message.text}
               {message.reactions.length > 0 && (
-                <div className="mt-1 flex items-center justify-end space-x-1">
+                <div className="absolute right-0 flex items-center justify-end space-x-1">
                   {message.reactions.map((reaction, index) => (
                     <span
                       key={index}
-                      className="rounded-full bg-[#3a3b3c] px-2 py-1 text-xs text-[#e4e6eb] shadow"
+                      className="rounded-full border-t-2 border-black bg-[#3a3b3c] px-2 py-1 text-xs text-[#e4e6eb] shadow"
                     >
-                      {reaction.emoji} {reaction.count}
+                      {reaction.emoji}{" "}
+                      {reaction.count > 1 ? reaction.count : ""}
                     </span>
                   ))}
                 </div>
@@ -124,37 +127,37 @@ export default function MessengerUI({ data }) {
           </div>
         ))}
       </div>
-      <div className="border-t border-[#3a3b3c] p-3">
-        <div className="flex items-center rounded-full bg-[#3a3b3c] p-1">
+      <div className="p-3">
+        <div className="flex items-center rounded-full p-1">
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <PlusCircledIcon className="h-6 w-6" />
+            <PlusCircledIcon className="h-5 w-5" />
           </Button>
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <Camera className="h-6 w-6" />
+            <Camera className="h-5 w-5" />
           </Button>
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <Image className="h-6 w-6" />
+            <Image className="h-5 w-5" />
           </Button>
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <Mic className="h-6 w-6" />
+            <Mic className="h-5 w-5" />
           </Button>
-          <Input
-            type="text"
-            placeholder="Message"
-            className="flex-1 border-none bg-transparent text-[#e4e6eb] placeholder-[#b0b3b8] focus:ring-0"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-          />
-          <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <Smile className="h-6 w-6" />
-          </Button>
+          <div className="relative">
+            <Input
+              type="text"
+              placeholder="Message"
+              className="flex-1 rounded-full border-none bg-[#3a3b3c] text-[#e4e6eb] placeholder-[#b0b3b8] focus:ring-0"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+            ></Input>
+            <Smile className="absolute right-2 top-1/2 h-5 w-5 -translate-y-1/2 text-[#0084ff]" />
+          </div>
           {newMessage ? (
             <Button variant="ghost" size="icon" className="text-[#0084ff]">
-              <Send className="h-6 w-6" />
+              <Send className="h-5 w-5" />
             </Button>
           ) : (
             <Button variant="ghost" size="icon" className="text-[#0084ff]">
-              <ThumbsUp className="h-6 w-6" />
+              <ThumbsUp className="h-5 w-5" />
             </Button>
           )}
         </div>
@@ -162,13 +165,13 @@ export default function MessengerUI({ data }) {
 
       <div className="flex w-full items-center justify-between px-16 pb-2">
         <Button variant="ghost" size="icon" className="text-[#b0b3b8]">
-          <Menu className="h-6 w-6 rotate-90" />
+          <Menu className="h-4 w-4 rotate-90" />
         </Button>
         <Button variant="ghost" size="icon" className="mx-2">
-          <Square className="h-6 w-6" />
+          <Square className="h-4 w-4" />
         </Button>
         <Button variant="ghost" size="icon" className="text-[#b0b3b8]">
-          <ChevronLeft className="h-6 w-6" />
+          <ChevronLeft className="h-5 w-5" />
         </Button>
       </div>
     </div>
@@ -178,7 +181,7 @@ export default function MessengerUI({ data }) {
     <div className="flex max-w-md flex-col bg-white">
       <div className="flex items-center border-b bg-white p-3">
         <Button variant="ghost" size="icon" className="mr-2">
-          <ArrowLeft className="h-6 w-6" />
+          <ArrowLeft className="h-5 w-5" />
         </Button>
         <Avatar className="h-10 w-10">
           <AvatarImage src="/placeholder-avatar.jpg" alt="Contact" />
@@ -189,13 +192,13 @@ export default function MessengerUI({ data }) {
           <p className="text-sm text-gray-500">Active now</p>
         </div>
         <Button variant="ghost" size="icon">
-          <Phone className="h-6 w-6" />
+          <Phone className="h-5 w-5" />
         </Button>
         <Button variant="ghost" size="icon">
-          <VideoIcon className="h-6 w-6" />
+          <VideoIcon className="h-5 w-5" />
         </Button>
         <Button variant="ghost" size="icon">
-          <Info className="h-6 w-6" />
+          <Info className="h-5 w-5" />
         </Button>
       </div>
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
@@ -243,13 +246,13 @@ export default function MessengerUI({ data }) {
       <div className="border-t p-3">
         <div className="flex items-center rounded-full bg-[#f1f0f0] p-1">
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <Camera className="h-6 w-6" />
+            <Camera className="h-5 w-5" />
           </Button>
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <Image className="h-6 w-6" />
+            <Image className="h-5 w-5" />
           </Button>
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <Mic className="h-6 w-6" />
+            <Mic className="h-5 w-5" />
           </Button>
           <Input
             type="text"
@@ -260,7 +263,7 @@ export default function MessengerUI({ data }) {
             onKeyPress={(e) => e.key === "Enter" && sendMessage()}
           />
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <Smile className="h-6 w-6" />
+            <Smile className="h-5 w-5" />
           </Button>
           {newMessage ? (
             <Button
@@ -269,11 +272,11 @@ export default function MessengerUI({ data }) {
               className="text-[#0084ff]"
               onClick={sendMessage}
             >
-              <Send className="h-6 w-6" />
+              <Send className="h-5 w-5" />
             </Button>
           ) : (
             <Button variant="ghost" size="icon" className="text-[#0084ff]">
-              <ThumbsUp className="h-6 w-6" />
+              <ThumbsUp className="h-5 w-5" />
             </Button>
           )}
         </div>
