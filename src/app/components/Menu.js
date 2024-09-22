@@ -80,7 +80,11 @@ export default function Menu({ data, setData }) {
 
   return (
     <div className="custom-scrollbar space-y-2 overflow-y-scroll pr-2">
-      <Accordion type="multiple" className="w-full">
+      <Accordion
+        type="single"
+        defaultValue={"device-status"}
+        className="w-full"
+      >
         <AccordionItem value="device-status" className="border-b-0">
           <AccordionTrigger className="rounded-t-lg px-8 py-4 text-xl font-bold text-white hover:bg-zinc-700">
             Phone Settings
