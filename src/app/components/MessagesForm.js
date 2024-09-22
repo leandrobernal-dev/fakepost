@@ -156,7 +156,7 @@ export default function MessagesForm({ data, setData }) {
                 <Label htmlFor="image">Image URL</Label>
                 <Input
                   id="image"
-                  value={editingMessage.image}
+                  defaultValue={editingMessage.image}
                   onChange={(e) =>
                     setEditingMessage({
                       ...editingMessage,
@@ -169,7 +169,7 @@ export default function MessagesForm({ data, setData }) {
                 <Label htmlFor="text">Text</Label>
                 <Textarea
                   id="text"
-                  value={editingMessage.text}
+                  defaultValue={editingMessage.text}
                   onChange={(e) =>
                     setEditingMessage({
                       ...editingMessage,
@@ -182,7 +182,7 @@ export default function MessagesForm({ data, setData }) {
                 <Label htmlFor="senderName">Sender Name</Label>
                 <Input
                   id="senderName"
-                  value={editingMessage.senderName}
+                  defaultValue={editingMessage.senderName}
                   onChange={(e) =>
                     setEditingMessage({
                       ...editingMessage,
@@ -195,7 +195,7 @@ export default function MessagesForm({ data, setData }) {
                 <Label htmlFor="time">Time</Label>
                 <Input
                   id="time"
-                  value={editingMessage.time}
+                  defaultValue={editingMessage.time}
                   onChange={(e) =>
                     setEditingMessage({
                       ...editingMessage,
