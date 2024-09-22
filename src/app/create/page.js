@@ -2,7 +2,6 @@
 
 import Menu from "@/app/components/Menu";
 import MessengerUI from "@/app/components/MessengerUI";
-import { toPng } from "html-to-image";
 import { useState } from "react";
 
 export default function Home() {
@@ -93,50 +92,6 @@ export default function Home() {
       },
     ],
   });
-
-  const quality = 10;
-
-  const captureImage = () => {
-    const node = document.getElementById("html-section");
-    const messagesSection = document.getElementById("messages-section");
-
-    const scrollTop = messagesSection.scrollTop;
-
-    const nodeClone = node.cloneNode(true);
-    const messagesSectionClone = messagesSection.cloneNode(true);
-
-    // Create a new container element
-    const messagesContainer = document.createElement("div");
-    messagesContainer.className = "relative flex-1 overflow-hidden";
-
-    // Set messagesSectionClone position absolute
-    messagesSectionClone.style.position = "absolute";
-    messagesSectionClone.style.top = -scrollTop + "px";
-
-    // Add messagesSectionClone to messagesContainer
-    messagesContainer.appendChild(messagesSectionClone);
-
-    const oldMessages = nodeClone.querySelector("#messages-section");
-    console.log(messagesContainer);
-
-    if (oldMessages) {
-      oldMessages.parentNode.replaceChild(messagesContainer, oldMessages);
-    }
-    document.body.appendChild(nodeClone); // Append to the DOM
-
-    toPng(nodeClone, {
-      pixelRatio: quality,
-    })
-      .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = "html-image.png";
-        link.href = dataUrl;
-        link.click();
-
-        document.body.removeChild(nodeClone);
-      })
-      .catch((err) => console.error("Error generating image", err));
-  };
 
   return (
     <div>
