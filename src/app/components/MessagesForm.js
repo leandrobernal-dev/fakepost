@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Edit, Trash2, ChevronUp, ChevronDown } from "lucide-react";
+import { Edit, Trash2, ChevronUp, ChevronDown, PlusCircle } from "lucide-react";
 
 export default function MessagesForm({ data, setData }) {
   const messages = data.messages;
@@ -70,12 +70,13 @@ export default function MessagesForm({ data, setData }) {
 
   return (
     <div className="overflow-auto">
-      <Button onClick={addMessage} className="mb-4">
-        Add New Message
+      <Button onClick={addMessage} className="mb-4 flex gap-1">
+        Add New
+        <PlusCircle className="h-4 w-4" />
       </Button>
       {messages.map((message, index) => (
         <Card key={message.id} className="mb-4 bg-zinc-800 text-white">
-          <CardContent className="flex items-center p-4">
+          <CardContent className="flex items-center p-1">
             <div className="mr-2 flex flex-col">
               <Button
                 variant="ghost"
@@ -105,9 +106,11 @@ export default function MessagesForm({ data, setData }) {
                 </div>
               </div>
             ) : (
-              <div className="mr-4 flex-grow">{message.text}</div>
+              <div className="mr-4 flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
+                {message.text}
+              </div>
             )}
-            <div className="flex space-x-2">
+            <div className="flex space-x-1">
               <Button
                 variant="ghost"
                 size="icon"
