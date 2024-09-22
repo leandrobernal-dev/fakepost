@@ -23,12 +23,6 @@ export default function Menu({ data, setData }) {
       contactDetails: { ...prev.contactDetails, [name]: value },
     }));
   };
-  const handleStatusChange = (value) => {
-    setData((prev) => ({ ...prev, status: value }));
-  };
-  const handleSliderChange = (name, value) => {
-    setPhoneSettings((prev) => ({ ...prev, [name]: value[0] }));
-  };
   return (
     <div className="custom-scrollbar space-y-2 overflow-y-scroll pr-2">
       <div className="w-full max-w-md rounded-lg bg-zinc-800 p-8 shadow-xl">
