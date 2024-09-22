@@ -12,8 +12,53 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { toPng } from "html-to-image";
+import { Button } from "@/components/ui/button";
 
 export default function Menu({ data, setData }) {
+  const downloadQuality = 10;
+
+  const captureImage = () => {
+    const node = document.getElementById("html-section");
+    const messagesSection = document.getElementById("messages-section");
+
+    const scrollTop = messagesSection.scrollTop;
+
+    const nodeClone = node.cloneNode(true);
+    const messagesSectionClone = messagesSection.cloneNode(true);
+
+    // Create a new container element
+    const messagesContainer = document.createElement("div");
+    messagesContainer.className = "relative flex-1 overflow-hidden";
+
+    // Set messagesSectionClone position absolute
+    messagesSectionClone.style.position = "absolute";
+    messagesSectionClone.style.top = -scrollTop + "px";
+
+    // Add messagesSectionClone to messagesContainer
+    messagesContainer.appendChild(messagesSectionClone);
+
+    const oldMessages = nodeClone.querySelector("#messages-section");
+    console.log(messagesContainer);
+
+    if (oldMessages) {
+      oldMessages.parentNode.replaceChild(messagesContainer, oldMessages);
+    }
+    document.body.appendChild(nodeClone); // Append to the DOM
+
+    toPng(nodeClone, {
+      pixelRatio: downloadQuality,
+    })
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "html-image.png";
+        link.href = dataUrl;
+        link.click();
+
+        document.body.removeChild(nodeClone);
+      })
+      .catch((err) => console.error("Error generating image", err));
+  };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => ({ ...prev, [name]: value }));
@@ -219,6 +264,7 @@ export default function Menu({ data, setData }) {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+      <Button onClick={captureImage}>Download</Button>
     </div>
   );
 }
