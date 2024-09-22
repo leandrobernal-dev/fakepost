@@ -85,11 +85,11 @@ export default function Menu({ data, setData }) {
         defaultValue={"device-status"}
         className="w-full"
       >
-        <AccordionItem value="device-status" className="border-b-0">
-          <AccordionTrigger className="rounded-t-lg px-8 py-4 text-xl font-bold text-white hover:bg-zinc-700">
+        <AccordionItem value="device-status" className="">
+          <AccordionTrigger className="px-8 py-4 font-bold text-white hover:bg-zinc-700">
             Phone Settings
           </AccordionTrigger>
-          <AccordionContent className="rounded-b-lg bg-zinc-800 px-8 py-6 text-white">
+          <AccordionContent className="bg-zinc-800 px-8 py-6 text-white">
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label
@@ -184,11 +184,11 @@ export default function Menu({ data, setData }) {
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="contact-details" className="border-b-0">
-          <AccordionTrigger className="rounded-t-lg px-8 py-4 text-xl font-bold text-white hover:bg-zinc-700">
+        <AccordionItem value="contact-details" className="">
+          <AccordionTrigger className="px-8 py-4 font-bold text-white hover:bg-zinc-700">
             Contact Details
           </AccordionTrigger>
-          <AccordionContent className="rounded-b-lg bg-zinc-800 px-8 py-6 text-white">
+          <AccordionContent className="bg-zinc-800 px-8 py-6 text-white">
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
@@ -259,11 +259,11 @@ export default function Menu({ data, setData }) {
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="messages" className="border-b-0">
-          <AccordionTrigger className="rounded-t-lg px-8 py-4 text-xl font-bold text-white hover:bg-zinc-700">
+        <AccordionItem value="messages" className="">
+          <AccordionTrigger className="px-8 py-4 font-bold text-white hover:bg-zinc-700">
             Messages
           </AccordionTrigger>
-          <AccordionContent className="rounded-b-lg bg-zinc-800 px-8 py-6 text-white">
+          <AccordionContent className="bg-zinc-800 px-8 py-6 text-white">
             <MessagesForm data={data} setData={setData} />
           </AccordionContent>
         </AccordionItem>
