@@ -21,7 +21,7 @@ import {
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import PhoneDetails from "@/app/components/PhoneDetails";
 
-export default function MessengerUI({ messages, data, setData }) {
+export default function MessengerUI({ data }) {
   const [newMessage, setNewMessage] = useState("");
 
   const getMessageById = (id) => data.messages.find((m) => m.id === id);
