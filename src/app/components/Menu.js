@@ -60,10 +60,6 @@ export default function Menu({ data, setData }) {
       })
       .catch((err) => console.error("Error generating image", err));
   };
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setData((prev) => ({ ...prev, [name]: value }));
-  };
 
   const setPhoneSettings = (name, value) => {
     setData((prev) => ({
