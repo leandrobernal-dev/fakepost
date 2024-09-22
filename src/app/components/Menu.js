@@ -14,9 +14,11 @@ import {
 } from "@/components/ui/accordion";
 import { toPng } from "html-to-image";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export default function Menu({ data, setData }) {
   const downloadQuality = 10;
+  const [maxBattery, setMaxBattery] = useState(100);
 
   const captureImage = () => {
     const node = document.getElementById("html-section");
@@ -89,27 +91,44 @@ export default function Menu({ data, setData }) {
           <AccordionContent className="px-8 py-6 text-white">
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label
-                  htmlFor="battery"
-                  className="flex items-center text-white"
-                >
-                  <BatteryIcon className="mr-2" /> Battery
-                </Label>
-                <div className="flex items-center gap-2">
-                  <Slider
-                    id="battery"
-                    name="battery"
-                    min={0}
-                    max={100}
-                    step={1}
-                    value={[data.phoneSettings.battery]}
-                    onValueChange={(value) =>
-                      setPhoneSettings("battery", value[0])
-                    }
-                    className="w-full"
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="battery"
+                    className="flex items-center text-white"
+                  >
+                    <BatteryIcon className="mr-2" /> Battery
+                  </Label>
+                  <Label
+                    htmlFor="maxBattery"
+                    className="flex items-center text-white"
+                  >
+                    Max
+                  </Label>
+                  <Input
+                    type="number"
+                    id="maxBattery"
+                    name="maxBattery"
+                    min={1}
+                    max={maxBattery}
+                    defaultValue={maxBattery}
+                    onChange={(e) => setMaxBattery(Number(e.target.value))}
                   />
-                  <div className="text-sm text-gray-400">
-                    {data.phoneSettings.battery}%
+                  <div className="flex items-center gap-2">
+                    <Slider
+                      id="battery"
+                      name="battery"
+                      min={0}
+                      max={maxBattery}
+                      step={1}
+                      value={[data.phoneSettings.battery]}
+                      onValueChange={(value) =>
+                        setPhoneSettings("battery", value[0])
+                      }
+                      className="w-full"
+                    />
+                    <div className="text-sm text-gray-400">
+                      {data.phoneSettings.battery}%
+                    </div>
                   </div>
                 </div>
               </div>
