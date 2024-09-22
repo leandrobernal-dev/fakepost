@@ -38,7 +38,14 @@ export default function MessengerUI({ data }) {
         </Button>
         <div className="relative">
           <Avatar className="h-10 w-10">
-            <AvatarImage src="/placeholder-avatar.jpg" alt="Contact" />
+            <AvatarImage
+              src={
+                data.contactDetails.image
+                  ? data.contactDetails.image
+                  : "/default-profile.png"
+              }
+              alt="Contact"
+            />
             <AvatarFallback>{data.contactDetails.name[0]}</AvatarFallback>
           </Avatar>
           {data.contactDetails.active && (

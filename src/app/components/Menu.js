@@ -154,13 +154,31 @@ export default function Menu({ data, setData }) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="image">Profile picture</Label>
+                <label htmlFor="image">Profile picture</label>
                 <Input
-                  type="url"
+                  type="file"
                   id="image"
                   name="image"
-                  value={data.contactDetails.image}
-                  onChange={handleInputChange}
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files[0]; // Get the uploaded file
+                    if (file) {
+                      const reader = new FileReader();
+
+                      // Read the file as Data URL (Base64)
+                      reader.onloadend = () => {
+                        setData((prevData) => ({
+                          ...prevData,
+                          contactDetails: {
+                            ...prevData.contactDetails,
+                            image: reader.result,
+                          }, // Update image in state
+                        }));
+                      };
+
+                      reader.readAsDataURL(file); // This triggers onloadend event
+                    }
+                  }} // Update the state on image change
                   className="w-full"
                 />
               </div>
