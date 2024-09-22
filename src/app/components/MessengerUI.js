@@ -36,10 +36,17 @@ export default function MessengerUI({ messages, data, setData }) {
         <Button variant="ghost" size="icon" className="mr-2 text-[#e4e6eb]">
           <ArrowLeft className="h-6 w-6" />
         </Button>
-        <Avatar className="h-10 w-10">
-          <AvatarImage src="/placeholder-avatar.jpg" alt="Contact" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        <div className="relative">
+          <Avatar className="h-10 w-10">
+            <AvatarImage src="/placeholder-avatar.jpg" alt="Contact" />
+            <AvatarFallback>{data.contactDetails.name[0]}</AvatarFallback>
+          </Avatar>
+          {data.contactDetails.active && (
+            <span className="absolute bottom-0 right-0 flex h-3 w-3 items-center justify-center rounded-full bg-black">
+              <span className="h-2 w-2 rounded-full bg-green-500"></span>
+            </span>
+          )}
+        </div>
         <div className="ml-3 flex-1">
           <h1 className="text-lg font-semibold text-[#e4e6eb]">
             {data.contactDetails.name}
