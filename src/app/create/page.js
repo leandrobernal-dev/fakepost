@@ -103,7 +103,7 @@ export default function Home() {
     ],
   });
   return (
-    <div className="flex h-screen w-full overflow-y-auto">
+    <div className="flex h-screen w-full">
       <div className="hidden overflow-auto lg:block lg:w-96 lg:shrink-0 lg:border-r">
         <div className="flex h-full flex-col justify-between px-4 py-6">
           <div>
