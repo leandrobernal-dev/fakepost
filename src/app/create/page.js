@@ -12,6 +12,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
+import PreviewCanvas from "@/app/components/PreviewCanvas";
 
 export default function Home() {
   const [data, setData] = useState({
@@ -146,8 +147,10 @@ export default function Home() {
             </Sheet>
           </div>
         </header>
-        <main className="h-full p-4">
-          <MessengerUI data={data} setData={setData} />
+        <main className="h-full p-2">
+          <PreviewCanvas>
+            <MessengerUI data={data} setData={setData} />
+          </PreviewCanvas>
         </main>
       </div>
     </div>
