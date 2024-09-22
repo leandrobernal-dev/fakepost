@@ -7,6 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Edit, Trash2, ChevronUp, ChevronDown, PlusCircle } from "lucide-react";
 
 export default function MessagesForm({ data, setData }) {
@@ -129,9 +136,15 @@ export default function MessagesForm({ data, setData }) {
           </CardContent>
         </Card>
       ))}
-      {editingMessage && (
-        <Card className="mt-4">
-          <CardContent>
+      <Dialog open={!!editingMessage}>
+        <DialogContent className="w-[90%] bg-black sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit profile</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you're done.
+            </DialogDescription>
+          </DialogHeader>
+          {editingMessage && (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -224,7 +237,7 @@ export default function MessagesForm({ data, setData }) {
                 />
                 <Label htmlFor="seen">Seen</Label>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex justify-end space-x-2">
                 <Button type="submit">Save</Button>
                 <Button
                   type="button"
@@ -235,9 +248,9 @@ export default function MessagesForm({ data, setData }) {
                 </Button>
               </div>
             </form>
-          </CardContent>
-        </Card>
-      )}
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
