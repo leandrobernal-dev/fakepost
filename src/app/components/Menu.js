@@ -109,7 +109,6 @@ export default function Menu({ data, setData }) {
                     id="maxBattery"
                     name="maxBattery"
                     min={1}
-                    max={maxBattery}
                     defaultValue={maxBattery}
                     onChange={(e) => setMaxBattery(Number(e.target.value))}
                   />
