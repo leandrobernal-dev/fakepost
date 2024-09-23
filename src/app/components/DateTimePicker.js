@@ -13,8 +13,10 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 
-export default function DateTimePicker({ onUpdate }) {
-  const [dateTime, setDateTime] = useState(new Date());
+export default function DateTimePicker({ onUpdate, defaultValue }) {
+  const [dateTime, setDateTime] = useState(
+    defaultValue ? new Date(defaultValue) : new Date(),
+  );
 
   useEffect(() => {
     onUpdate(dateTime);
