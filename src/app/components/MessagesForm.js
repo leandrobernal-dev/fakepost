@@ -10,11 +10,17 @@ import { Switch } from "@/components/ui/switch";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Edit, Trash2, ChevronUp, ChevronDown, PlusCircle } from "lucide-react";
+import {
+  Edit,
+  Trash2,
+  ChevronUp,
+  ChevronDown,
+  PlusCircle,
+  X,
+} from "lucide-react";
 
 export default function MessagesForm({ data, setData }) {
   const messages = data.messages;
@@ -138,11 +144,15 @@ export default function MessagesForm({ data, setData }) {
       ))}
       <Dialog open={!!editingMessage}>
         <DialogContent className="w-[90%] bg-black sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription>
+          <DialogHeader className="flex flex-row items-center justify-between">
+            <DialogTitle>Edit message</DialogTitle>
+            <Button
+              className=""
+              size="icon"
+              onClick={() => setEditingMessage(null)}
+            >
+              <X className="h-4 w-4" />
+            </Button>
           </DialogHeader>
           {editingMessage && (
             <form
