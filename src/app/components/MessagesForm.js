@@ -135,7 +135,7 @@ export default function MessagesForm({ data, setData }) {
           </Card>
         ))}
       <Dialog open={!!editingMessage}>
-        <DialogContent className="w-[90%] bg-black sm:max-w-[425px]">
+        <DialogContent className="h-[95vh] w-[90%] overflow-y-auto bg-black sm:max-w-[425px]">
           <DialogHeader className="flex flex-row items-center justify-between">
             <DialogTitle>Edit message</DialogTitle>
             <Button
