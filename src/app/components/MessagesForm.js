@@ -21,6 +21,7 @@ import {
   PlusCircle,
   X,
 } from "lucide-react";
+import DateTimePicker from "@/app/components/DateTimePicker";
 
 export default function MessagesForm({ data, setData }) {
   const messages = data.messages;
@@ -202,15 +203,11 @@ export default function MessagesForm({ data, setData }) {
                 />
               </div>
               <div>
-                <Label htmlFor="time">Time</Label>
-                <Input
-                  id="time"
-                  defaultValue={editingMessage.time}
-                  onChange={(e) =>
-                    setEditingMessage({
-                      ...editingMessage,
-                      time: e.target.value,
-                    })
+                <Label>Date and Time</Label>
+                <DateTimePicker
+                  defaultValue={editingMessage.dateTime}
+                  onUpdate={(value) =>
+                    setEditingMessage({ ...editingMessage, dateTime: value })
                   }
                 />
               </div>
