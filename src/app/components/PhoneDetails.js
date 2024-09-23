@@ -20,11 +20,13 @@ export default function PhoneDetails({ phoneSettings }) {
     <div className="flex items-center justify-between p-1 px-4 text-[#e4e6eb]">
       <div className="flex items-center">
         <span className="mr-2 text-sm">
-          {phoneSettings.dateTime?.toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-          })}
+          {phoneSettings.dateTime
+            ?.toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            })
+            .replace(/(AM|PM)/, "")}
         </span>
       </div>
       <div className="flex items-end">
