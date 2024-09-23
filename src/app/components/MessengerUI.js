@@ -111,7 +111,9 @@ export default function MessengerUI({ data }) {
                   className="rounded-xl"
                 />
               )}
-              {message.text}
+              <div className="whitespace-pre-wrap break-words">
+                {message.text}
+              </div>
               {message.reactions.length > 0 && (
                 <div className="absolute right-0 flex items-center justify-end space-x-1">
                   {message.reactions.map((reaction, index) => (
