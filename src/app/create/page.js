@@ -24,9 +24,9 @@ export default function Home() {
     },
     contactDetails: {
       senderName: "John Doe",
-      senderPicture: "",
+      senderPicture: "/default-profile.png",
       receiverName: "Jane Doe",
-      receiverPicture: "",
+      receiverPicture: "/default-profile.png",
       active: true,
       statusText: "Active Now",
     },
