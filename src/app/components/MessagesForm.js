@@ -190,19 +190,6 @@ export default function MessagesForm({ data, setData }) {
                 />
               </div>
               <div>
-                <Label htmlFor="senderName">Sender Name</Label>
-                <Input
-                  id="senderName"
-                  defaultValue={editingMessage.senderName}
-                  onChange={(e) =>
-                    setEditingMessage({
-                      ...editingMessage,
-                      senderName: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div>
                 <Label>Date and Time</Label>
                 <DateTimePicker
                   defaultValue={editingMessage.dateTime}
@@ -219,7 +206,7 @@ export default function MessagesForm({ data, setData }) {
                     setEditingMessage({ ...editingMessage, sent: checked })
                   }
                 />
-                <Label htmlFor="sent">Sent</Label>
+                <Label htmlFor="sent">Sender?</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <Switch
