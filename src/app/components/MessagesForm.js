@@ -13,14 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Edit,
-  Trash2,
-  ChevronUp,
-  ChevronDown,
-  PlusCircle,
-  X,
-} from "lucide-react";
+import { Edit, Trash2, PlusCircle, X, Send } from "lucide-react";
 import DateTimePicker from "@/app/components/DateTimePicker";
 import EmojiPicker from "@/app/components/EmojiPicker";
 import {
