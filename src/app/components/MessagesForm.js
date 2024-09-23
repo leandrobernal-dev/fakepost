@@ -88,61 +88,45 @@ export default function MessagesForm({ data, setData }) {
         Add New
         <PlusCircle className="h-4 w-4" />
       </Button>
-      {messages.map((message, index) => (
-        <Card key={message.id} className="mb-4 bg-zinc-800 text-white">
-          <CardContent className="flex items-center p-1">
-            <div className="mr-2 flex flex-col">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => moveMessage(index, "up")}
-                disabled={index === 0}
-              >
-                <ChevronUp className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => moveMessage(index, "down")}
-                disabled={index === messages.length - 1}
-              >
-                <ChevronDown className="h-4 w-4" />
-              </Button>
-            </div>
-            {message.image ? (
-              <div className="flex-grow">
-                <div className="mr-4 h-12 w-12 overflow-hidden rounded-md bg-gray-200">
-                  <img
-                    src={message.image}
-                    alt="Message"
-                    className="h-full w-full object-cover"
-                  />
+      {messages
+        .sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
+        .map((message) => (
+          <Card key={message.id} className="mb-4 bg-zinc-800 text-white">
+            <CardContent className="flex items-center p-1">
+              {message.image ? (
+                <div className="flex-grow">
+                  <div className="mr-4 h-12 w-12 overflow-hidden rounded-md bg-gray-200">
+                    <img
+                      src={message.image}
+                      alt="Message"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
                 </div>
+              ) : (
+                <div className="mr-4 flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
+                  {message.text}
+                </div>
+              )}
+              <div className="flex space-x-1">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setEditingMessage(message)}
+                >
+                  <Edit className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => deleteMessage(message.id)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
               </div>
-            ) : (
-              <div className="mr-4 flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
-                {message.text}
-              </div>
-            )}
-            <div className="flex space-x-1">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setEditingMessage(message)}
-              >
-                <Edit className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => deleteMessage(message.id)}
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+            </CardContent>
+          </Card>
+        ))}
       <Dialog open={!!editingMessage}>
         <DialogContent className="w-[90%] bg-black sm:max-w-[425px]">
           <DialogHeader className="flex flex-row items-center justify-between">
