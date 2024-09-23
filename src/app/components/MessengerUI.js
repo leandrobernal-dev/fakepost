@@ -111,8 +111,11 @@ export default function MessengerUI({ data }) {
                             start: subWeeks(new Date(), 1),
                             end: new Date(),
                           })
-                        ? currentTimeSent.toLocaleString("default", {
+                        ? currentTimeSent.toLocaleString("en-US", {
                             weekday: "short",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: true,
                           })
                         : currentTimeSent.toLocaleString()}
                   </span>
@@ -125,7 +128,23 @@ export default function MessengerUI({ data }) {
                 className={`flex ${message.sent ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`relative max-w-[70%] rounded-2xl p-2 ${message.sent === data.messages[index + 1]?.sent ? (isNextAndCurrentOneMinuteApart ? (message.sent ? "rounded-br-sm" : "rounded-bl-sm") : "") : ""} ${message.sent === data.messages[index - 1]?.sent ? (isPreviousAndCurrentOneMinuteApart ? (message.sent ? "rounded-tr-sm" : "rounded-tl-sm") : "") : ""} ${
+                  className={`relative max-w-[70%] rounded-3xl px-3 py-2 ${
+                    message.sent === data.messages[index + 1]?.sent
+                      ? isNextAndCurrentOneMinuteApart
+                        ? message.sent
+                          ? "rounded-br-sm"
+                          : "rounded-bl-sm"
+                        : ""
+                      : ""
+                  } ${
+                    message.sent === data.messages[index - 1]?.sent
+                      ? isPreviousAndCurrentOneMinuteApart
+                        ? message.sent
+                          ? "rounded-tr-sm"
+                          : "rounded-tl-sm"
+                        : ""
+                      : ""
+                  } ${
                     message.image
                       ? ""
                       : message.sent
@@ -221,6 +240,12 @@ export default function MessengerUI({ data }) {
       </div>
     </div>
   );
+
+  function subWeeks(date, weeks) {
+    const newDate = new Date(date);
+    newDate.setDate(date.getDate() - weeks * 7);
+    return newDate;
+  }
   function isSameDay(date1, date2) {
     return (
       date1.getFullYear() === date2.getFullYear() &&
@@ -348,11 +373,4 @@ export default function MessengerUI({ data }) {
       </div>
     </div>
   );
-}
-function areDatesLessThanOneMinuteApart(date1, date2) {
-  // Get the absolute difference in time (in milliseconds)
-  const differenceInMilliseconds = Math.abs(new Date(date1) - new Date(date2));
-
-  // Check if the difference is less than 60,000 milliseconds (1 minute)
-  return differenceInMilliseconds < 60000;
 }
