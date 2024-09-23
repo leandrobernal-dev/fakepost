@@ -109,11 +109,11 @@ export default function MessengerUI({ data }) {
           return (
             <div
               key={message.id}
-              className={`flex flex-col gap-6 ${message.sent !== data.messages[index + 1]?.sent && !isPreviousAndCurrentOneMinuteApart ? "mb-4" : ""}`}
+              className={`flex flex-col gap-4 ${message.sent !== data.messages[index + 1]?.sent && !isPreviousAndCurrentOneMinuteApart ? "mb-4" : ""}`}
             >
               {!isPreviousAndCurrentOneMinuteApart ? (
                 <div
-                  className={`mt-16 w-full text-center text-xs text-zinc-600`}
+                  className={`mt-8 w-full text-center text-xs text-zinc-600`}
                 >
                   <span>
                     {isSameDay(currentTimeSent, new Date())
