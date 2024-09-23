@@ -247,6 +247,71 @@ export default function MessagesForm({ data, setData }) {
                 />
                 <Label htmlFor="seen">Seen</Label>
               </div>
+              <div>
+                <Label>Reactions</Label>
+                {editingMessage.reactions.map((reaction, index) => (
+                  <div key={index} className="mt-2 flex items-center space-x-2">
+                    <Input
+                      value={reaction.emoji}
+                      onChange={(e) => {
+                        const newReactions = [...editingMessage.reactions];
+                        newReactions[index].emoji = e.target.value;
+                        setEditingMessage({
+                          ...editingMessage,
+                          reactions: newReactions,
+                        });
+                      }}
+                      className="w-20"
+                    />
+                    <Input
+                      type="number"
+                      value={reaction.count}
+                      onChange={(e) => {
+                        const newReactions = [...editingMessage.reactions];
+                        newReactions[index].count = parseInt(e.target.value);
+                        setEditingMessage({
+                          ...editingMessage,
+                          reactions: newReactions,
+                        });
+                      }}
+                      className="w-20"
+                    />
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="icon"
+                      onClick={() => {
+                        const newReactions = [...editingMessage.reactions];
+                        newReactions.splice(index, 1);
+                        setEditingMessage({
+                          ...editingMessage,
+                          reactions: newReactions,
+                        });
+                      }}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ))}
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setEditingMessage({
+                      ...editingMessage,
+                      reactions: [
+                        ...editingMessage.reactions,
+                        { emoji: "", count: 1 },
+                      ],
+                    });
+                  }}
+                  className="mt-2"
+                >
+                  <PlusCircle className="mr-2 h-4 w-4" />
+                  Add Reaction
+                </Button>
+              </div>
               <div className="flex justify-end space-x-2">
                 <Button type="submit">Save</Button>
                 <Button
