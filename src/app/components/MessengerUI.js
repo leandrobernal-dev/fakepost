@@ -79,8 +79,23 @@ export default function MessengerUI({ data }) {
 
       <div
         id="messages-section"
-        className={`no-scrollbar flex-1 space-y-1 overflow-y-auto p-4`}
+        className={`no-scrollbar flex flex-1 flex-col gap-[3px] overflow-y-auto p-4`}
       >
+        <div className="flex w-full flex-col items-center justify-center gap-2">
+          <NextImage
+            className="rounded-full"
+            width={130}
+            height={130}
+            quality={100}
+            priority
+            src={data.contactDetails.receiverPicture}
+          />
+          <p className="text-center text-2xl font-semibold">
+            {data.contactDetails.receiverName}
+          </p>
+          <p className="text-sm">You're friends on Facebook</p>
+          <p className="rounded-full bg-zinc-800 p-2 text-sm">View Profile</p>
+        </div>
         {data.messages.map((message, index) => {
           const currentTimeSent = new Date(message.dateTime);
           const prevTimeSent = data.messages[index - 1]?.dateTime;
