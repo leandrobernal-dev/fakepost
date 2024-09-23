@@ -22,6 +22,7 @@ import {
   X,
 } from "lucide-react";
 import DateTimePicker from "@/app/components/DateTimePicker";
+import EmojiPicker from "@/app/components/EmojiPicker";
 
 export default function MessagesForm({ data, setData }) {
   const messages = data.messages;
@@ -224,17 +225,16 @@ export default function MessagesForm({ data, setData }) {
                 <Label>Reactions</Label>
                 {editingMessage.reactions.map((reaction, index) => (
                   <div key={index} className="mt-2 flex items-center space-x-2">
-                    <Input
-                      value={reaction.emoji}
-                      onChange={(e) => {
+                    <EmojiPicker
+                      defaultValue={reaction.emoji}
+                      onChange={(value) => {
                         const newReactions = [...editingMessage.reactions];
-                        newReactions[index].emoji = e.target.value;
+                        newReactions[index].emoji = value;
                         setEditingMessage({
                           ...editingMessage,
                           reactions: newReactions,
                         });
                       }}
-                      className="w-20"
                     />
                     <Input
                       type="number"
