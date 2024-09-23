@@ -100,7 +100,22 @@ export default function MessengerUI({ data }) {
                 <div
                   className={`mt-16 w-full text-center text-xs text-zinc-600`}
                 >
-                  <span>{currentTimeSent.toLocaleString()} </span>
+                  <span>
+                    {isSameDay(currentTimeSent, new Date())
+                      ? currentTimeSent.toLocaleTimeString("en-US", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          second: undefined,
+                        })
+                      : isWithinInterval(currentTimeSent, {
+                            start: subWeeks(new Date(), 1),
+                            end: new Date(),
+                          })
+                        ? currentTimeSent.toLocaleString("default", {
+                            weekday: "short",
+                          })
+                        : currentTimeSent.toLocaleString()}
+                  </span>
                 </div>
               ) : (
                 ""
@@ -206,6 +221,26 @@ export default function MessengerUI({ data }) {
       </div>
     </div>
   );
+  function isSameDay(date1, date2) {
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    );
+  }
+
+  function isWithinInterval(date, { start, end }) {
+    return date >= start && date <= end;
+  }
+  function areDatesLessThanOneMinuteApart(date1, date2) {
+    // Get the absolute difference in time (in milliseconds)
+    const differenceInMilliseconds = Math.abs(
+      new Date(date1) - new Date(date2),
+    );
+
+    // Check if the difference is less than 60,000 milliseconds (1 minute)
+    return differenceInMilliseconds < 60000;
+  }
 
   return (
     <div className="flex max-w-md flex-col bg-white">
