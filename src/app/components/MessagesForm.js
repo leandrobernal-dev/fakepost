@@ -271,6 +271,7 @@ export default function MessagesForm({ data, setData }) {
               </div>
               <div>
                 <Label>Reactions</Label>
+                <br />
                 {editingMessage.reactions.map((reaction, index) => (
                   <div key={index} className="mt-2 flex items-center space-x-2">
                     <EmojiPicker
