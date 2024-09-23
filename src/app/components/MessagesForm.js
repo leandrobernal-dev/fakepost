@@ -23,6 +23,14 @@ import {
 } from "lucide-react";
 import DateTimePicker from "@/app/components/DateTimePicker";
 import EmojiPicker from "@/app/components/EmojiPicker";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function MessagesForm({ data, setData }) {
   const messages = data.messages;
@@ -187,6 +195,53 @@ export default function MessagesForm({ data, setData }) {
                     setEditingMessage({ ...editingMessage, dateTime: value })
                   }
                 />
+              </div>
+              <div>
+                <Label>Replied To?</Label>
+                <Select
+                  defaultValue={editingMessage?.replyTo}
+                  onValueChange={(value) =>
+                    setEditingMessage({ ...editingMessage, replyTo: value })
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select message" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem className="cursor-pointer" value={null}>
+                        None
+                      </SelectItem>
+                      {data.messages
+                        .slice(
+                          0,
+                          data.messages.findIndex(
+                            (message) => message.id === editingMessage.id,
+                          ),
+                        )
+                        .map((message) => (
+                          <SelectItem
+                            key={message.id}
+                            className={`cursor-pointer`}
+                            value={String(message.id)}
+                          >
+                            <div className="flex items-center gap-2">
+                              <Send
+                                className={`w-4" mr-2 h-4 ${
+                                  message.sent
+                                    ? "text-[#0084ff]"
+                                    : "text-[#3a3b3c]"
+                                }`}
+                              />
+                              {message.text.length > 30
+                                ? `${message.text.slice(0, 30)}...`
+                                : message.text}
+                            </div>
+                          </SelectItem>
+                        ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="flex items-center space-x-2">
                 <Switch
