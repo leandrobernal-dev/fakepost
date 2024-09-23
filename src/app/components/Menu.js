@@ -15,6 +15,7 @@ import {
 import { toPng } from "html-to-image";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import DateTimePicker from "@/app/components/DateTimePicker";
 
 export default function Menu({ data, setData }) {
   const downloadQuality = 10;
@@ -135,16 +136,13 @@ export default function Menu({ data, setData }) {
               <div className="space-y-2">
                 <Label htmlFor="time" className="flex items-center text-white">
                   <Clock className="mr-2" />
-                  Time
+                  Date & Time
                 </Label>
-                <Input
-                  type="time"
-                  id="time"
-                  name="time"
-                  value={data.phoneSettings.time}
-                  onChange={(e) => setPhoneSettings("time", e.target.value)}
-                  className="border-gray-600 bg-gray-700 text-white"
-                />
+                <div className="space-y-2">
+                  <DateTimePicker
+                    onUpdate={(value) => setPhoneSettings("dateTime", value)}
+                  />
+                </div>
               </div>
 
               <div className="space-y-2">

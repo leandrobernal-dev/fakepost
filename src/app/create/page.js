@@ -2,7 +2,7 @@
 
 import Menu from "@/app/components/Menu";
 import MessengerUI from "@/app/components/MessengerUI";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +18,7 @@ export default function Home() {
   const [data, setData] = useState({
     phoneSettings: {
       battery: 4,
-      time: "10:45",
+      dateTime: null,
       wifi: 100,
       cellular: 50,
     },
@@ -30,6 +30,13 @@ export default function Home() {
     },
     messages: [],
   });
+
+  useEffect(() => {
+    setData((prev) => ({
+      ...prev,
+      dateTime: new Date(),
+    }));
+  }, []);
   return (
     <div className="flex h-screen w-full">
       <div className="hidden overflow-auto lg:block lg:w-96 lg:shrink-0 lg:border-r">
