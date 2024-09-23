@@ -92,22 +92,27 @@ export default function MessagesForm({ data, setData }) {
         .sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
         .map((message) => (
           <Card key={message.id} className="mb-4 bg-zinc-800 text-white">
-            <CardContent className="flex items-center p-1">
-              {message.image ? (
-                <div className="flex-grow">
-                  <div className="mr-4 h-12 w-12 overflow-hidden rounded-md bg-gray-200">
+            <CardContent className="flex items-center justify-between gap-1 p-2">
+              <div className="flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
+                {message.image ? (
+                  <div className="h-12 w-12 overflow-hidden rounded-md bg-gray-200">
                     <img
                       src={message.image}
                       alt="Message"
                       className="h-full w-full object-cover"
                     />
                   </div>
-                </div>
-              ) : (
-                <div className="mr-4 flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
-                  {message.text}
-                </div>
-              )}
+                ) : (
+                  <div className="flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
+                    {message.text}
+                  </div>
+                )}
+                <span className="text-xs text-zinc-500">
+                  {new Date(message.dateTime).toLocaleDateString()}{" "}
+                  {new Date(message.dateTime).toLocaleTimeString()}
+                </span>
+              </div>
+
               <div className="flex space-x-1">
                 <Button
                   variant="ghost"
