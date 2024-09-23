@@ -79,58 +79,85 @@ export default function MessengerUI({ data }) {
 
       <div
         id="messages-section"
-        className={`no-scrollbar flex-1 space-y-8 overflow-y-auto p-4`}
+        className={`no-scrollbar flex-1 space-y-1 overflow-y-auto p-4`}
       >
-        {data.messages.map((message) => (
-          <div
-            key={message.id}
-            className={`flex ${message.sent ? "justify-end" : "justify-start"}`}
-          >
+        {data.messages.map((message, index) => {
+          const currentTimeSent = new Date(message.dateTime);
+          const prevTimeSent = data.messages[index - 1]?.dateTime;
+          const isPreviousAndCurrentOneMinuteApart =
+            areDatesLessThanOneMinuteApart(prevTimeSent, currentTimeSent);
+          const isNextAndCurrentOneMinuteApart = areDatesLessThanOneMinuteApart(
+            currentTimeSent,
+            data.messages[index + 1]?.dateTime,
+          );
+
+          return (
             <div
-              className={`relative max-w-[70%] rounded-2xl p-2 ${
-                message.image
-                  ? ""
-                  : message.sent
-                    ? "bg-[#0084ff] text-white"
-                    : "bg-[#3a3b3c] text-[#e4e6eb]"
-              }`}
+              key={message.id}
+              // className={`${isOneMinuteApart ? "mb-1" : "mb-8 mt-16"}`}
+              className={`flex flex-col gap-6 ${message.sent !== data.messages[index + 1]?.sent && !isPreviousAndCurrentOneMinuteApart ? "mb-4" : ""}`}
             >
-              {message.replyTo && (
-                <div className="mb-2 border-l-4 border-[#4e4f50] pl-2 text-sm opacity-70">
-                  {getMessageById(message.replyTo)?.text}
+              {!isPreviousAndCurrentOneMinuteApart ? (
+                <div
+                  className={`mt-16 w-full text-center text-xs text-zinc-600`}
+                >
+                  <span>{currentTimeSent.toLocaleString()} </span>
                 </div>
+              ) : (
+                ""
               )}
-              {message.image && (
-                <NextImage
-                  width={200}
-                  height={200}
-                  quality={100}
-                  priority
-                  src={message.image}
-                  alt="Sent image"
-                  className="rounded-xl"
-                />
-              )}
-              <div className="whitespace-pre-wrap break-words">
-                {message.text}
+
+              <div
+                className={`flex ${message.sent ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`relative max-w-[70%] rounded-2xl p-2 ${message.sent === data.messages[index + 1]?.sent ? (isNextAndCurrentOneMinuteApart ? (message.sent ? "rounded-br-sm" : "rounded-bl-sm") : "") : ""} ${message.sent === data.messages[index - 1]?.sent ? (isPreviousAndCurrentOneMinuteApart ? (message.sent ? "rounded-tr-sm" : "rounded-tl-sm") : "") : ""} ${
+                    message.image
+                      ? ""
+                      : message.sent
+                        ? "bg-[#0084ff] text-white"
+                        : "bg-[#3a3b3c] text-[#e4e6eb]"
+                  }`}
+                >
+                  {message.replyTo && (
+                    <div className="mb-2 border-l-4 border-[#4e4f50] pl-2 text-sm opacity-70">
+                      {getMessageById(message.replyTo)?.text}
+                    </div>
+                  )}
+                  {message.image && (
+                    <NextImage
+                      width={200}
+                      height={200}
+                      quality={100}
+                      priority
+                      src={message.image}
+                      alt="Sent image"
+                      className="rounded-xl"
+                    />
+                  )}
+                  <div className="whitespace-pre-wrap break-words">
+                    {message.text}
+                  </div>
+                  {message.reactions.length > 0 && (
+                    <div className="absolute right-0 flex items-center justify-end space-x-1">
+                      {message.reactions.map((reaction, index) => (
+                        <span
+                          key={index}
+                          className="rounded-full border-t-2 border-black bg-[#3a3b3c] px-2 py-1 text-xs text-[#e4e6eb] shadow"
+                        >
+                          {reaction.emoji}{" "}
+                          {reaction.count > 1 ? reaction.count : ""}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-              {message.reactions.length > 0 && (
-                <div className="absolute right-0 flex items-center justify-end space-x-1">
-                  {message.reactions.map((reaction, index) => (
-                    <span
-                      key={index}
-                      className="rounded-full border-t-2 border-black bg-[#3a3b3c] px-2 py-1 text-xs text-[#e4e6eb] shadow"
-                    >
-                      {reaction.emoji}{" "}
-                      {reaction.count > 1 ? reaction.count : ""}
-                    </span>
-                  ))}
-                </div>
-              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
+
       <div className="p-3">
         <div className="flex items-center rounded-full p-1">
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
@@ -287,4 +314,11 @@ export default function MessengerUI({ data }) {
       </div>
     </div>
   );
+}
+function areDatesLessThanOneMinuteApart(date1, date2) {
+  // Get the absolute difference in time (in milliseconds)
+  const differenceInMilliseconds = Math.abs(new Date(date1) - new Date(date2));
+
+  // Check if the difference is less than 60,000 milliseconds (1 minute)
+  return differenceInMilliseconds < 60000;
 }
