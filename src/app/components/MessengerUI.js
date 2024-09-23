@@ -24,7 +24,8 @@ import PhoneDetails from "@/app/components/PhoneDetails";
 export default function MessengerUI({ data }) {
   const [newMessage, setNewMessage] = useState("");
 
-  const getMessageById = (id) => data.messages.find((m) => m.id === id);
+  const getMessageById = (id) =>
+    data.messages.find((m) => String(m.id) === String(id));
 
   return (
     <div
