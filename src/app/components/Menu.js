@@ -204,19 +204,20 @@ export default function Menu({ data, setData }) {
           <AccordionContent className="px-8 py-6 text-white">
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">Receiver Name</Label>
                 <Input
                   type="text"
                   id="name"
                   name="name"
-                  value={data.contactDetails.name}
-                  onChange={(e) => setContactDetails("name", e.target.value)}
+                  value={data.contactDetails.receiverName}
+                  onChange={(e) =>
+                    setContactDetails("receiverName", e.target.value)
+                  }
                   className="w-full"
                 />
               </div>
-
               <div className="space-y-2">
-                <label htmlFor="image">Profile picture</label>
+                <label htmlFor="image">Receiver profile picture</label>
                 <Input
                   type="file"
                   id="image"
@@ -233,7 +234,7 @@ export default function Menu({ data, setData }) {
                           ...prevData,
                           contactDetails: {
                             ...prevData.contactDetails,
-                            image: reader.result,
+                            receiverPicture: reader.result,
                           }, // Update image in state
                         }));
                       };
@@ -244,7 +245,46 @@ export default function Menu({ data, setData }) {
                   className="w-full"
                 />
               </div>
+              <div className="space-y-2">
+                <Label htmlFor="sender-name">Sender Name</Label>
+                <Input
+                  type="text"
+                  id="sender-name"
+                  value={data.contactDetails.senderName}
+                  onChange={(e) =>
+                    setContactDetails("senderName", e.target.value)
+                  }
+                  className="w-full"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="sender-image">Sender profile picture</label>
+                <Input
+                  type="file"
+                  id="sender-image"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files[0]; // Get the uploaded file
+                    if (file) {
+                      const reader = new FileReader();
 
+                      // Read the file as Data URL (Base64)
+                      reader.onloadend = () => {
+                        setData((prevData) => ({
+                          ...prevData,
+                          contactDetails: {
+                            ...prevData.contactDetails,
+                            senderPicture: reader.result,
+                          }, // Update image in state
+                        }));
+                      };
+
+                      reader.readAsDataURL(file); // This triggers onloadend event
+                    }
+                  }} // Update the state on image change
+                  className="w-full"
+                />
+              </div>
               <div className="space-y-2">
                 <Label>Active Status</Label>
                 <Switch

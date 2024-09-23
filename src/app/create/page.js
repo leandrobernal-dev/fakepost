@@ -23,8 +23,10 @@ export default function Home() {
       cellular: 50,
     },
     contactDetails: {
-      name: "John Doe",
-      image: "",
+      senderName: "John Doe",
+      senderPicture: "",
+      receiverName: "Jane Doe",
+      receiverPicture: "",
       active: true,
       statusText: "Active Now",
     },

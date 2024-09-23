@@ -40,13 +40,15 @@ export default function MessengerUI({ data }) {
           <Avatar className="h-10 w-10">
             <AvatarImage
               src={
-                data.contactDetails.image
-                  ? data.contactDetails.image
+                data.contactDetails.receiverPicture
+                  ? data.contactDetails.receiverPicture
                   : "/default-profile.png"
               }
               alt="Contact"
             />
-            <AvatarFallback>{data.contactDetails.name[0]}</AvatarFallback>
+            <AvatarFallback>
+              {data.contactDetails.receiverName[0]}
+            </AvatarFallback>
           </Avatar>
           {data.contactDetails.active && (
             <span className="absolute bottom-0 right-0 flex h-3 w-3 items-center justify-center rounded-full bg-black">
@@ -56,7 +58,7 @@ export default function MessengerUI({ data }) {
         </div>
         <div className="ml-3 flex-1">
           <h1 className="text-md font-semibold text-[#e4e6eb]">
-            {data.contactDetails.name}
+            {data.contactDetails.receiverName}
           </h1>
           {data.contactDetails.active && (
             <p className="text-xs text-[#b0b3b8]">
