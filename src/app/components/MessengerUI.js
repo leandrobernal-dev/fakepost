@@ -80,7 +80,7 @@ export default function MessengerUI({ data }) {
 
       <div
         id="messages-section"
-        className={`no-scrollbar flex flex-1 flex-col gap-[3px] overflow-y-auto p-4`}
+        className={`no-scrollbar flex flex-1 flex-col gap-[3px] overflow-y-auto p-4 px-2`}
       >
         <div className="flex w-full flex-col items-center justify-center gap-2">
           <NextImage
