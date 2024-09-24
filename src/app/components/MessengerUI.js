@@ -142,10 +142,21 @@ export default function MessengerUI({ data }) {
               )}
 
               <div
-                className={`flex ${message.sent ? "justify-end" : "justify-start"}`}
+                className={`relative flex pl-10 ${message.sent ? "justify-end" : "justify-start"}`}
               >
+                {!message.sent &&
+                  (!isNextAndCurrentOneMinuteApart ||
+                    data.messages[index + 1]?.sent) && (
+                    <NextImage
+                      width={30}
+                      height={30}
+                      src="/default-profile.png"
+                      alt=""
+                      className="absolute -bottom-1 -left-0 h-8 w-8 rounded-full object-cover"
+                    />
+                  )}
                 <div
-                  className={`relative max-w-[70%] rounded-3xl px-3 py-2 ${
+                  className={`z-10 max-w-[70%] rounded-3xl px-3 py-2 ${
                     message.sent === data.messages[index + 1]?.sent
                       ? isNextAndCurrentOneMinuteApart
                         ? message.sent
