@@ -157,7 +157,7 @@ export default function MessengerUI({ data }) {
                     <NextImage
                       width={30}
                       height={30}
-                      src="/default-profile.png"
+                      src={data.contactDetails.receiverPicture}
                       alt=""
                       className="absolute -bottom-1 -left-0 h-8 w-8 rounded-full object-cover"
                     />
