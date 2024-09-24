@@ -162,7 +162,7 @@ export default function MessengerUI({ data }) {
                         : ""
                       : ""
                   } ${
-                    message.image
+                    message.type === "image"
                       ? ""
                       : message.sent
                         ? "bg-[#0084ff] text-white"
@@ -170,8 +170,20 @@ export default function MessengerUI({ data }) {
                   }`}
                 >
                   {message.replyTo && (
-                    <div className="mb-2 border-l-4 border-[#4e4f50] pl-2 text-sm opacity-70">
-                      {getMessageById(message.replyTo)?.text}
+                    <div className="absolute bottom-4 left-0 z-0 mb-2 rounded-full bg-zinc-900 p-2 text-sm opacity-70">
+                      {getMessageById(message.replyTo)?.type === "text" ? (
+                        getMessageById(message.replyTo)?.text
+                      ) : (
+                        <NextImage
+                          width={200}
+                          height={200}
+                          quality={100}
+                          priority
+                          src={getMessageById(message.replyTo)?.image}
+                          alt="Sent image"
+                          className="rounded-xl"
+                        />
+                      )}
                     </div>
                   )}
                   {message.type === "image" ? (
