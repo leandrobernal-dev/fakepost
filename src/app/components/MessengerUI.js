@@ -188,9 +188,9 @@ export default function MessengerUI({ data }) {
                     </>
                   )}
                   {/* Main chat bubble */}
-                  <div className={`z-50 max-w-[90%]`}>
+                  <div className={`max-w-[90%]`}>
                     <div
-                      className={`rounded-3xl ${
+                      className={`relative z-10 rounded-3xl ${
                         message.sent === data.messages[index + 1]?.sent &&
                         message.reactions.length === 0
                           ? data.messages[index + 1]?.replyTo
