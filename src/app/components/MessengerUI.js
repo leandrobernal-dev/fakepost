@@ -272,6 +272,15 @@ export default function MessengerUI({ data }) {
             </div>
           );
         })}
+        <div className="flex w-full justify-end pr-1 pt-1">
+          <NextImage
+            width={14}
+            height={14}
+            src={data.contactDetails.receiverPicture}
+            alt=""
+            className="rounded-full"
+          />
+        </div>
       </div>
 
       <div className="p-3">
