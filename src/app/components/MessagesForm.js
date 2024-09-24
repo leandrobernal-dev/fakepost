@@ -13,7 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Edit, Trash2, PlusCircle, X, Send } from "lucide-react";
+import { Edit, Trash2, PlusCircle, X, Send, CopyPlus } from "lucide-react";
 import DateTimePicker from "@/app/components/DateTimePicker";
 import EmojiPicker from "@/app/components/EmojiPicker";
 import {
@@ -93,7 +93,7 @@ export default function MessagesForm({ data, setData }) {
       </Button>
       {messages
         .sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
-        .map((message) => (
+        .map((message, index) => (
           <Card key={message.id} className="mb-4 bg-zinc-800 text-white">
             <CardContent className="flex items-center justify-between gap-1 p-2">
               <div className="flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
@@ -117,6 +117,22 @@ export default function MessagesForm({ data, setData }) {
               </div>
 
               <div className="flex space-x-1">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() =>
+                    setData((prevState) => ({
+                      ...prevState,
+                      messages: [
+                        ...prevState.messages.slice(0, index + 1),
+                        { ...message, id: Date.now() },
+                        ...prevState.messages.slice(index + 1),
+                      ],
+                    }))
+                  }
+                >
+                  <CopyPlus className="h-4 w-4" />
+                </Button>
                 <Button
                   variant="ghost"
                   size="icon"
