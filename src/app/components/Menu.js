@@ -12,57 +12,43 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { toPng } from "html-to-image";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import DateTimePicker from "@/app/components/DateTimePicker";
+import html2canvas from "html2canvas";
+
+const captureImage = async (elementId) => {
+  const element = document.getElementById("html-section");
+
+  if (!element) {
+    console.error("Element not found");
+    return;
+  }
+
+  try {
+    // Capture the element as a canvas
+    const canvas = await html2canvas(element, {
+      scale: 3,
+    });
+
+    // Convert the canvas to a data URL (base64 image)
+    const image = canvas.toDataURL("image/png");
+
+    // Create a temporary link element to download the image
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "captured-image.png";
+
+    // Simulate a click to trigger the download
+    link.click();
+  } catch (error) {
+    console.error("Error capturing image: ", error);
+  }
+};
 
 export default function Menu({ data, setData }) {
   const downloadQuality = 10;
   const [maxBattery, setMaxBattery] = useState(100);
-
-  const captureImage = () => {
-    const node = document.getElementById("html-section");
-    const messagesSection = document.getElementById("messages-section");
-
-    const scrollTop = messagesSection.scrollTop;
-
-    const nodeClone = node.cloneNode(true);
-    const messagesSectionClone = messagesSection.cloneNode(true);
-
-    // Create a new container element
-    const messagesContainer = document.createElement("div");
-    messagesContainer.className = "relative flex-1 overflow-hidden";
-
-    // Set messagesSectionClone position absolute
-    messagesSectionClone.style.position = "absolute";
-    messagesSectionClone.style.top = -scrollTop + "px";
-
-    // Add messagesSectionClone to messagesContainer
-    messagesContainer.appendChild(messagesSectionClone);
-
-    const oldMessages = nodeClone.querySelector("#messages-section");
-    console.log(messagesContainer);
-
-    if (oldMessages) {
-      oldMessages.parentNode.replaceChild(messagesContainer, oldMessages);
-    }
-    document.body.appendChild(nodeClone); // Append to the DOM
-
-    toPng(nodeClone, {
-      pixelRatio: downloadQuality,
-      includeQueryParams: true,
-    })
-      .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = "html-image.png";
-        link.href = dataUrl;
-        link.click();
-
-        document.body.removeChild(nodeClone);
-      })
-      .catch((err) => console.error("Error generating image", err));
-  };
 
   const setPhoneSettings = (name, value) => {
     setData((prev) => ({
