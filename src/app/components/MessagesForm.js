@@ -97,7 +97,7 @@ export default function MessagesForm({ data, setData }) {
           <Card key={message.id} className="mb-4 bg-zinc-800 text-white">
             <CardContent className="flex items-center justify-between gap-1 p-2">
               <div className="flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
-                {message.image ? (
+                {message.type === "image" ? (
                   <div className="h-12 w-12 overflow-hidden rounded-md bg-gray-200">
                     <img
                       src={message.image}
