@@ -52,9 +52,17 @@ export default function PhoneDetails({ phoneSettings }) {
             <SignalZero className="w-4" />
           )}
         </span>
-        <span className="flex items-end text-sm">
+        <span className="flex items-center gap-1 text-xs">
           {phoneSettings.battery}%
-          <BatteryIcon batteryLevel={phoneSettings.battery} />
+          {phoneSettings.battery >= 75 ? (
+            <BatteryFull className="w-5" />
+          ) : phoneSettings.battery >= 50 ? (
+            <BatteryMedium className="w-4" />
+          ) : phoneSettings.battery >= 25 ? (
+            <BatteryLow className="w-4" />
+          ) : (
+            <BatteryWarning className="w-4" />
+          )}
         </span>
       </div>
     </div>
