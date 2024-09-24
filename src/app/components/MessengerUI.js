@@ -174,7 +174,7 @@ export default function MessengerUI({ data }) {
                       {getMessageById(message.replyTo)?.text}
                     </div>
                   )}
-                  {message.image && (
+                  {message.type === "image" ? (
                     <NextImage
                       width={200}
                       height={200}
@@ -184,10 +184,12 @@ export default function MessengerUI({ data }) {
                       alt="Sent image"
                       className="rounded-xl"
                     />
+                  ) : (
+                    <div className="whitespace-pre-wrap break-words">
+                      {message.text}
+                    </div>
                   )}
-                  <div className="whitespace-pre-wrap break-words">
-                    {message.text}
-                  </div>
+
                   {message.reactions.length > 0 && (
                     <div className="absolute right-0 flex items-center justify-end space-x-1">
                       {message.reactions.map((reaction, index) => (
