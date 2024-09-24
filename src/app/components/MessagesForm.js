@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Image from "next/image";
 
 export default function MessagesForm({ data, setData }) {
   const messages = data.messages;
@@ -154,31 +155,80 @@ export default function MessagesForm({ data, setData }) {
               }}
               className="space-y-4"
             >
-              <div>
-                <Label htmlFor="image">Image URL</Label>
-                <Input
-                  id="image"
-                  defaultValue={editingMessage.image}
-                  onChange={(e) =>
+              <div className="space-y-2">
+                <Label htmlFor="message-type">Message type</Label>
+                <Select
+                  defaultValue={editingMessage.type || "text"}
+                  onValueChange={(value) =>
                     setEditingMessage({
                       ...editingMessage,
-                      image: e.target.value,
+                      type: value,
                     })
                   }
-                />
-              </div>
-              <div>
-                <Label htmlFor="text">Text</Label>
-                <Textarea
-                  id="text"
-                  defaultValue={editingMessage.text}
-                  onChange={(e) =>
-                    setEditingMessage({
-                      ...editingMessage,
-                      text: e.target.value,
-                    })
-                  }
-                />
+                >
+                  <SelectTrigger className="">
+                    <SelectValue placeholder="Image/Text" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="text">Text</SelectItem>
+                    <SelectItem value="image">Image</SelectItem>
+                  </SelectContent>
+                </Select>
+
+                {editingMessage.type === "image" ? (
+                  <div className="flex items-center justify-between">
+                    {editingMessage.image && (
+                      <div className="h-[60px] w-[60px] overflow-hidden rounded-md bg-gray-200">
+                        <Image
+                          width={50}
+                          height={50}
+                          src={editingMessage.image}
+                          alt="Image preview"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <Label htmlFor="image">
+                        {editingMessage.image ? "Update" : "Upload"} image
+                      </Label>
+                      <Input
+                        id="image"
+                        type="file"
+                        onChange={(e) => {
+                          const file = e.target.files[0]; // Get the uploaded file
+                          if (file) {
+                            const reader = new FileReader();
+
+                            // Read the file as Data URL (Base64)
+                            reader.onloadend = () => {
+                              setEditingMessage({
+                                ...editingMessage,
+                                image: reader.result,
+                              });
+                            };
+
+                            reader.readAsDataURL(file); // This triggers onloadend event
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <Label htmlFor="text">Text</Label>
+                    <Textarea
+                      id="text"
+                      defaultValue={editingMessage.text}
+                      onChange={(e) =>
+                        setEditingMessage({
+                          ...editingMessage,
+                          text: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                )}
               </div>
               <div>
                 <Label>Date and Time</Label>
