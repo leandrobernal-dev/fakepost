@@ -65,7 +65,7 @@ export default function Menu({ data, setData }) {
   };
 
   return (
-    <div className="custom-scrollbar space-y-2 overflow-y-scroll pr-2">
+    <div className="custom-scrollbar space-y-2 pr-2">
       <Accordion
         type="single"
         defaultValue={"device-status"}

@@ -41,7 +41,7 @@ export default function Home() {
   }, []);
   return (
     <div className="flex h-screen w-full">
-      <div className="hidden overflow-auto lg:block lg:w-96 lg:shrink-0 lg:border-r">
+      <div className="custom-scrollbar fixed bottom-0 top-0 hidden overflow-auto lg:block lg:w-96 lg:shrink-0 lg:border-r">
         <div className="flex h-full flex-col justify-between px-4 py-6">
           <div>
             <Link
@@ -56,7 +56,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 lg:ml-96">
         <header className="sticky top-0 z-30 border-b bg-black px-4 py-3 lg:hidden">
           <div className="flex items-center justify-between">
             <Link
