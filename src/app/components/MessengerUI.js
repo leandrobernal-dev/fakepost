@@ -220,6 +220,18 @@ export default function MessengerUI({ data }) {
                             : "bg-[#3a3b3c] text-[#e4e6eb]"
                       }`}
                     >
+                      {/* Profile Picture */}
+                      {!message.sent &&
+                        (!isNextAndCurrentOneMinuteApart ||
+                          data.messages[index + 1]?.sent) && (
+                          <NextImage
+                            width={30}
+                            height={30}
+                            src={data.contactDetails.receiverPicture}
+                            alt=""
+                            className="absolute -bottom-2 -left-10 h-8 w-8 rounded-full object-cover"
+                          />
+                        )}
                       {message.type === "image" ? (
                         <NextImage
                           width={200}
@@ -257,7 +269,7 @@ export default function MessengerUI({ data }) {
                       )}
                     </div>
                     {message.reactions.length > 0 && (
-                      <div className="right-0 flex w-full -translate-y-2 items-center justify-end space-x-1">
+                      <div className="relative right-0 z-20 flex w-full -translate-y-2 items-center justify-end space-x-1">
                         <div className="rounded-full border-t-2 border-black bg-[#3a3b3c] px-2 py-1 text-xs text-zinc-400 shadow">
                           {message.reactions.map((reaction, index) => (
                             <span key={index}>{reaction.emoji} </span>
