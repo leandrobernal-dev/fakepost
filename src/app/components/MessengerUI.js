@@ -188,73 +188,76 @@ export default function MessengerUI({ data }) {
                     </>
                   )}
                   {/* Main chat bubble */}
-                  <div
-                    className={`z-50 max-w-[90%] rounded-3xl ${
-                      message.sent === data.messages[index + 1]?.sent
-                        ? data.messages[index + 1]?.replyTo
-                          ? ""
-                          : isNextAndCurrentOneMinuteApart
-                            ? message.sent
-                              ? "rounded-br-sm"
-                              : "rounded-bl-sm"
-                            : ""
-                        : ""
-                    } ${
-                      message.replyTo
-                        ? ""
-                        : message.sent === data.messages[index - 1]?.sent
-                          ? isPreviousAndCurrentOneMinuteApart
-                            ? message.sent
-                              ? "rounded-tr-sm"
-                              : "rounded-tl-sm"
-                            : ""
-                          : ""
-                    } ${
-                      message.type === "image"
-                        ? ""
-                        : message.sent
-                          ? "bg-[#0084ff] text-white"
-                          : "bg-[#3a3b3c] text-[#e4e6eb]"
-                    }`}
-                  >
-                    {message.type === "image" ? (
-                      <NextImage
-                        width={200}
-                        height={200}
-                        quality={100}
-                        priority
-                        src={message.image}
-                        alt="Sent image"
-                        className={`rounded-xl ${
-                          message.sent === data.messages[index + 1]?.sent
-                            ? data.messages[index + 1]?.replyTo
-                              ? ""
-                              : isNextAndCurrentOneMinuteApart
-                                ? message.sent
-                                  ? "rounded-br-sm"
-                                  : "rounded-bl-sm"
-                                : ""
-                            : ""
-                        } ${
-                          message.replyTo
+                  <div className={`z-50 max-w-[90%]`}>
+                    <div
+                      className={`rounded-3xl ${
+                        message.sent === data.messages[index + 1]?.sent &&
+                        message.reactions.length === 0
+                          ? data.messages[index + 1]?.replyTo
                             ? ""
-                            : message.sent === data.messages[index - 1]?.sent
-                              ? isPreviousAndCurrentOneMinuteApart
-                                ? message.sent
-                                  ? "rounded-tr-sm"
-                                  : "rounded-tl-sm"
-                                : ""
+                            : isNextAndCurrentOneMinuteApart
+                              ? message.sent
+                                ? "rounded-br-sm"
+                                : "rounded-bl-sm"
                               : ""
-                        }`}
-                      />
-                    ) : (
-                      <div className="whitespace-pre-wrap break-words px-3 py-2">
-                        {message.text}
-                      </div>
-                    )}
-
+                          : ""
+                      } ${
+                        message.replyTo
+                          ? ""
+                          : message.sent === data.messages[index - 1]?.sent &&
+                              data.messages[index - 1]?.reactions.length === 0
+                            ? isPreviousAndCurrentOneMinuteApart
+                              ? message.sent
+                                ? "rounded-tr-sm"
+                                : "rounded-tl-sm"
+                              : ""
+                            : ""
+                      } ${
+                        message.type === "image"
+                          ? ""
+                          : message.sent
+                            ? "bg-[#0084ff] text-white"
+                            : "bg-[#3a3b3c] text-[#e4e6eb]"
+                      }`}
+                    >
+                      {message.type === "image" ? (
+                        <NextImage
+                          width={200}
+                          height={200}
+                          quality={100}
+                          priority
+                          src={message.image}
+                          alt="Sent image"
+                          className={`rounded-xl ${
+                            message.sent === data.messages[index + 1]?.sent
+                              ? data.messages[index + 1]?.replyTo
+                                ? ""
+                                : isNextAndCurrentOneMinuteApart
+                                  ? message.sent
+                                    ? "rounded-br-sm"
+                                    : "rounded-bl-sm"
+                                  : ""
+                              : ""
+                          } ${
+                            message.replyTo
+                              ? ""
+                              : message.sent === data.messages[index - 1]?.sent
+                                ? isPreviousAndCurrentOneMinuteApart
+                                  ? message.sent
+                                    ? "rounded-tr-sm"
+                                    : "rounded-tl-sm"
+                                  : ""
+                                : ""
+                          }`}
+                        />
+                      ) : (
+                        <div className="whitespace-pre-wrap break-words px-3 py-2">
+                          {message.text}
+                        </div>
+                      )}
+                    </div>
                     {message.reactions.length > 0 && (
-                      <div className="absolute right-0 flex items-center justify-end space-x-1">
+                      <div className="right-0 flex w-full -translate-y-2 items-center justify-end space-x-1">
                         {message.reactions.map((reaction, index) => (
                           <span
                             key={index}
