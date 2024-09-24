@@ -89,6 +89,7 @@ export default function MessengerUI({ data }) {
             height={130}
             quality={100}
             priority
+            alt="Profile picture"
             src={data.contactDetails.receiverPicture}
           />
           <p className="text-center text-2xl font-semibold">
