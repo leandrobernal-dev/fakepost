@@ -153,40 +153,48 @@ export default function MessengerUI({ data }) {
               <div
                 className={`relative flex pl-10 ${message.sent ? "justify-end" : "justify-start"}`}
               >
-                {/* Profile Picture */}
-                {!message.sent &&
-                  (!isNextAndCurrentOneMinuteApart ||
-                    data.messages[index + 1]?.sent) && (
-                    <NextImage
-                      width={30}
-                      height={30}
-                      src={data.contactDetails.receiverPicture}
-                      alt=""
-                      className="absolute -bottom-1 -left-0 h-8 w-8 rounded-full object-cover"
-                    />
-                  )}
-
                 <div
                   className={`flex w-full flex-col ${message.sent ? "items-end" : "items-start"}`}
                 >
+                  {/* ReplyTo */}
                   {message.replyTo && (
                     <>
                       {getMessageById(message.replyTo)?.type === "text" ? (
-                        <div
-                          className={`z-0 max-h-20 max-w-[90%] translate-y-6 overflow-hidden text-ellipsis rounded-2xl bg-zinc-900 p-2 px-4 pb-8 text-sm opacity-80`}
-                        >
-                          {`${getMessageById(message.replyTo)?.text.slice(0, 50)}${getMessageById(message.replyTo)?.text.length > 50 ? "..." : ""}`}
+                        <div className="z-0 max-h-20 max-w-[90%] translate-y-6 opacity-50">
+                          <span className="mb-1 flex items-center gap-1 px-2 text-[10px]">
+                            <ReplyRounded fontSize="12px" />
+                            {message.sent
+                              ? `You replied to ${data.contactDetails.receiverName}`
+                              : `${data.contactDetails.receiverName} replied to you`}
+                          </span>
+                          <div
+                            className={`overflow-hidden text-ellipsis rounded-2xl bg-zinc-900 p-2 px-4 pb-8 text-sm`}
+                          >
+                            {`${getMessageById(message.replyTo)?.text.slice(0, 50)}${getMessageById(message.replyTo)?.text.length > 50 ? "..." : ""}`}
+                          </div>
                         </div>
                       ) : (
-                        <NextImage
-                          width={100}
-                          height={100}
-                          quality={100}
-                          priority
-                          src={getMessageById(message.replyTo)?.image}
-                          alt="Sent image"
-                          className="translate-y-6 rounded-xl opacity-50"
-                        />
+                        <div
+                          className={`z-0 flex max-h-20 max-w-[90%] translate-y-2 flex-col opacity-50 ${
+                            message.sent ? "items-end" : "items-start"
+                          }`}
+                        >
+                          <span className="mb-1 flex items-center gap-1 px-2 text-[10px]">
+                            <ReplyRounded fontSize="12px" />
+                            {message.sent
+                              ? `You replied to ${data.contactDetails.receiverName}`
+                              : `${data.contactDetails.receiverName} replied to you`}
+                          </span>
+                          <NextImage
+                            width={100}
+                            height={100}
+                            quality={100}
+                            priority
+                            src={getMessageById(message.replyTo)?.image}
+                            alt="Sent image"
+                            className="rounded-xl"
+                          />
+                        </div>
                       )}
                     </>
                   )}
