@@ -111,7 +111,12 @@ export default function MessengerUI({ data }) {
           return (
             <div
               key={message.id}
-              className={`flex flex-col gap-4 ${message.sent !== data.messages[index + 1]?.sent && !isPreviousAndCurrentOneMinuteApart ? "mb-4" : ""}`}
+              className={`flex flex-col gap-4 ${
+                message.sent !== data.messages[index + 1]?.sent &&
+                !isPreviousAndCurrentOneMinuteApart
+                  ? "mb-4"
+                  : ""
+              }`}
             >
               {!isPreviousAndCurrentOneMinuteApart ? (
                 <div
