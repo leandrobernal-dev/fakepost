@@ -258,15 +258,14 @@ export default function MessengerUI({ data }) {
                     </div>
                     {message.reactions.length > 0 && (
                       <div className="right-0 flex w-full -translate-y-2 items-center justify-end space-x-1">
-                        {message.reactions.map((reaction, index) => (
-                          <span
-                            key={index}
-                            className="rounded-full border-t-2 border-black bg-[#3a3b3c] px-2 py-1 text-xs text-[#e4e6eb] shadow"
-                          >
-                            {reaction.emoji}{" "}
-                            {reaction.count > 1 ? reaction.count : ""}
-                          </span>
-                        ))}
+                        <div className="rounded-full border-t-2 border-black bg-[#3a3b3c] px-2 py-1 text-xs text-zinc-400 shadow">
+                          {message.reactions.map((reaction, index) => (
+                            <span key={index}>{reaction.emoji} </span>
+                          ))}
+                          {message.reactions.length > 1
+                            ? message.reactions.length
+                            : ""}
+                        </div>
                       </div>
                     )}
                   </div>
