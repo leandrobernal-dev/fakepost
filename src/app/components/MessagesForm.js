@@ -276,9 +276,21 @@ export default function MessagesForm({ data, setData }) {
                                     : "text-[#3a3b3c]"
                                 }`}
                               />
-                              {message.text.length > 30
-                                ? `${message.text.slice(0, 30)}...`
-                                : message.text}
+                              <span>
+                                {message.type === "image" ? (
+                                  <div className="h-8 w-8 overflow-hidden rounded-md bg-gray-200">
+                                    <img
+                                      src={message.image}
+                                      alt="Message"
+                                      className="h-full w-full object-cover"
+                                    />
+                                  </div>
+                                ) : message.text.length > 30 ? (
+                                  `${message.text.slice(0, 30)}...`
+                                ) : (
+                                  message.text
+                                )}
+                              </span>
                             </div>
                           </SelectItem>
                         ))}
