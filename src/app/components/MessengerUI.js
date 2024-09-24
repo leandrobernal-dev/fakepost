@@ -118,6 +118,7 @@ export default function MessengerUI({ data }) {
                   : ""
               }`}
             >
+              {/* Date & Time Sent */}
               {!isPreviousAndCurrentOneMinuteApart ? (
                 <div
                   className={`mt-8 w-full text-center text-xs text-zinc-600`}
@@ -149,6 +150,7 @@ export default function MessengerUI({ data }) {
               <div
                 className={`relative flex pl-10 ${message.sent ? "justify-end" : "justify-start"}`}
               >
+                {/* Profile Picture */}
                 {!message.sent &&
                   (!isNextAndCurrentOneMinuteApart ||
                     data.messages[index + 1]?.sent) && (
@@ -160,77 +162,111 @@ export default function MessengerUI({ data }) {
                       className="absolute -bottom-1 -left-0 h-8 w-8 rounded-full object-cover"
                     />
                   )}
+
                 <div
-                  className={`z-10 max-w-[70%] rounded-3xl px-3 py-2 ${
-                    message.sent === data.messages[index + 1]?.sent
-                      ? isNextAndCurrentOneMinuteApart
-                        ? message.sent
-                          ? "rounded-br-sm"
-                          : "rounded-bl-sm"
-                        : ""
-                      : ""
-                  } ${
-                    message.sent === data.messages[index - 1]?.sent
-                      ? isPreviousAndCurrentOneMinuteApart
-                        ? message.sent
-                          ? "rounded-tr-sm"
-                          : "rounded-tl-sm"
-                        : ""
-                      : ""
-                  } ${
-                    message.type === "image"
-                      ? ""
-                      : message.sent
-                        ? "bg-[#0084ff] text-white"
-                        : "bg-[#3a3b3c] text-[#e4e6eb]"
-                  }`}
+                  className={`flex w-full flex-col ${message.sent ? "items-end" : "items-start"}`}
                 >
                   {message.replyTo && (
-                    <div className="absolute bottom-4 left-0 z-0 mb-2 rounded-full bg-zinc-900 p-2 text-sm opacity-70">
+                    <>
                       {getMessageById(message.replyTo)?.type === "text" ? (
-                        getMessageById(message.replyTo)?.text
+                        <div
+                          className={`z-0 max-h-20 max-w-[90%] translate-y-6 overflow-hidden text-ellipsis rounded-2xl bg-zinc-900 p-2 px-4 pb-8 text-sm opacity-80`}
+                        >
+                          {`${getMessageById(message.replyTo)?.text.slice(0, 50)}${getMessageById(message.replyTo)?.text.length > 50 ? "..." : ""}`}
+                        </div>
                       ) : (
                         <NextImage
-                          width={200}
-                          height={200}
+                          width={100}
+                          height={100}
                           quality={100}
                           priority
                           src={getMessageById(message.replyTo)?.image}
                           alt="Sent image"
-                          className="rounded-xl"
+                          className="translate-y-6 rounded-xl opacity-50"
                         />
                       )}
-                    </div>
+                    </>
                   )}
-                  {message.type === "image" ? (
-                    <NextImage
-                      width={200}
-                      height={200}
-                      quality={100}
-                      priority
-                      src={message.image}
-                      alt="Sent image"
-                      className="rounded-xl"
-                    />
-                  ) : (
-                    <div className="whitespace-pre-wrap break-words">
-                      {message.text}
-                    </div>
-                  )}
+                  {/* Main chat bubble */}
+                  <div
+                    className={`z-50 max-w-[90%] rounded-3xl ${
+                      message.sent === data.messages[index + 1]?.sent
+                        ? data.messages[index + 1]?.replyTo
+                          ? ""
+                          : isNextAndCurrentOneMinuteApart
+                            ? message.sent
+                              ? "rounded-br-sm"
+                              : "rounded-bl-sm"
+                            : ""
+                        : ""
+                    } ${
+                      message.replyTo
+                        ? ""
+                        : message.sent === data.messages[index - 1]?.sent
+                          ? isPreviousAndCurrentOneMinuteApart
+                            ? message.sent
+                              ? "rounded-tr-sm"
+                              : "rounded-tl-sm"
+                            : ""
+                          : ""
+                    } ${
+                      message.type === "image"
+                        ? ""
+                        : message.sent
+                          ? "bg-[#0084ff] text-white"
+                          : "bg-[#3a3b3c] text-[#e4e6eb]"
+                    }`}
+                  >
+                    {message.type === "image" ? (
+                      <NextImage
+                        width={200}
+                        height={200}
+                        quality={100}
+                        priority
+                        src={message.image}
+                        alt="Sent image"
+                        className={`rounded-xl ${
+                          message.sent === data.messages[index + 1]?.sent
+                            ? data.messages[index + 1]?.replyTo
+                              ? ""
+                              : isNextAndCurrentOneMinuteApart
+                                ? message.sent
+                                  ? "rounded-br-sm"
+                                  : "rounded-bl-sm"
+                                : ""
+                            : ""
+                        } ${
+                          message.replyTo
+                            ? ""
+                            : message.sent === data.messages[index - 1]?.sent
+                              ? isPreviousAndCurrentOneMinuteApart
+                                ? message.sent
+                                  ? "rounded-tr-sm"
+                                  : "rounded-tl-sm"
+                                : ""
+                              : ""
+                        }`}
+                      />
+                    ) : (
+                      <div className="whitespace-pre-wrap break-words px-3 py-2">
+                        {message.text}
+                      </div>
+                    )}
 
-                  {message.reactions.length > 0 && (
-                    <div className="absolute right-0 flex items-center justify-end space-x-1">
-                      {message.reactions.map((reaction, index) => (
-                        <span
-                          key={index}
-                          className="rounded-full border-t-2 border-black bg-[#3a3b3c] px-2 py-1 text-xs text-[#e4e6eb] shadow"
-                        >
-                          {reaction.emoji}{" "}
-                          {reaction.count > 1 ? reaction.count : ""}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+                    {message.reactions.length > 0 && (
+                      <div className="absolute right-0 flex items-center justify-end space-x-1">
+                        {message.reactions.map((reaction, index) => (
+                          <span
+                            key={index}
+                            className="rounded-full border-t-2 border-black bg-[#3a3b3c] px-2 py-1 text-xs text-[#e4e6eb] shadow"
+                          >
+                            {reaction.emoji}{" "}
+                            {reaction.count > 1 ? reaction.count : ""}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
