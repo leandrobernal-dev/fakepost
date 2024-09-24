@@ -5,21 +5,24 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
-  Phone,
-  VideoIcon,
-  Info,
-  ThumbsUp,
-  Camera,
   Image,
-  Mic,
   Send,
   Smile,
   Menu,
   Square,
   ChevronLeft,
 } from "lucide-react";
-import { PlusCircledIcon } from "@radix-ui/react-icons";
 import PhoneDetails from "@/app/components/PhoneDetails";
+import {
+  AddCircleRounded,
+  CameraAltRounded,
+  InfoRounded,
+  LocalPhoneRounded,
+  MicRounded,
+  ReplyRounded,
+  ThumbUpRounded,
+  VideocamRounded,
+} from "@mui/icons-material";
 
 export default function MessengerUI({ data }) {
   const [newMessage, setNewMessage] = useState("");
@@ -67,14 +70,14 @@ export default function MessengerUI({ data }) {
             </p>
           )}
         </div>
-        <Button variant="ghost" size="icon" className="text-[#e4e6eb]">
-          <Phone className="h-5 w-5" />
+        <Button variant="ghost" size="icon" className="text-[#0084ff]">
+          <LocalPhoneRounded />
         </Button>
-        <Button variant="ghost" size="icon" className="text-[#e4e6eb]">
-          <VideoIcon className="h-5 w-5" />
+        <Button variant="ghost" size="icon" className="text-[#0084ff]">
+          <VideocamRounded />
         </Button>
-        <Button variant="ghost" size="icon" className="text-[#e4e6eb]">
-          <Info className="h-5 w-5" />
+        <Button variant="ghost" size="icon" className="text-[#0084ff]">
+          <InfoRounded />
         </Button>
       </div>
 
@@ -300,16 +303,16 @@ export default function MessengerUI({ data }) {
       <div className="p-3">
         <div className="flex items-center rounded-full p-1">
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <PlusCircledIcon className="h-5 w-5" />
+            <AddCircleRounded fontSize="small" />
           </Button>
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <Camera className="h-5 w-5" />
+            <CameraAltRounded fontSize="small" />
           </Button>
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
             <Image className="h-5 w-5" />
           </Button>
           <Button variant="ghost" size="icon" className="text-[#0084ff]">
-            <Mic className="h-5 w-5" />
+            <MicRounded fontSize="small" />
           </Button>
           <div className="relative">
             <Input
@@ -327,7 +330,7 @@ export default function MessengerUI({ data }) {
             </Button>
           ) : (
             <Button variant="ghost" size="icon" className="text-[#0084ff]">
-              <ThumbsUp className="h-5 w-5" />
+              <ThumbUpRounded fontSize="small" />
             </Button>
           )}
         </div>
