@@ -13,7 +13,7 @@ export default function PreviewCanvas({ children }) {
   };
 
   return (
-    <div className="container mx-auto space-y-4">
+    <div className="">
       <div className="hidden justify-center space-x-2">
         <Button
           variant={viewport === "mobile" ? "default" : "outline"}
