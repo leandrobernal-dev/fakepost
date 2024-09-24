@@ -1,9 +1,13 @@
 import {
-  Battery,
+  Battery20,
+  Battery30,
+  Battery50,
+  Battery60,
+  Battery80,
+  Battery90,
   BatteryFull,
-  BatteryLow,
-  BatteryMedium,
-  BatteryWarning,
+} from "@mui/icons-material";
+import {
   SignalHigh,
   SignalLow,
   SignalMedium,
@@ -13,7 +17,21 @@ import {
   WifiLow,
   WifiZero,
 } from "lucide-react";
-import React, { useState } from "react";
+
+const Battery0 = () => (
+  <svg
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-20bmp1-MuiSvgIcon-root w-4"
+    focusable="false"
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    data-testid="Battery20Icon"
+  >
+    <path
+      fill-opacity=".3"
+      d="M7 17v3.67C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V17H7zM17 5.33C17 4.6 16.4 4 15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33V17h10V5.33z"
+    ></path>
+  </svg>
+);
 
 export default function PhoneDetails({ phoneSettings }) {
   return (
@@ -52,16 +70,24 @@ export default function PhoneDetails({ phoneSettings }) {
             <SignalZero className="w-4" />
           )}
         </span>
-        <span className="flex items-center gap-1 text-xs">
-          {phoneSettings.battery}%
-          {phoneSettings.battery >= 75 ? (
-            <BatteryFull className="w-5" />
+        <span className="flex items-end">
+          <span className="text-xs leading-5">{phoneSettings.battery}%</span>
+          {phoneSettings.battery >= 90 ? (
+            <BatteryFull className="w-4" />
+          ) : phoneSettings.battery >= 80 ? (
+            <Battery90 className="w-4" />
+          ) : phoneSettings.battery >= 60 ? (
+            <Battery80 className="w-4" />
           ) : phoneSettings.battery >= 50 ? (
-            <BatteryMedium className="w-4" />
-          ) : phoneSettings.battery >= 25 ? (
-            <BatteryLow className="w-4" />
+            <Battery60 className="w-4" />
+          ) : phoneSettings.battery >= 30 ? (
+            <Battery50 className="w-4" />
+          ) : phoneSettings.battery >= 20 ? (
+            <Battery30 className="w-4" />
+          ) : phoneSettings.battery > 0 ? (
+            <Battery20 className="w-4" />
           ) : (
-            <BatteryWarning className="w-4" />
+            <Battery0 className="w-4" />
           )}
         </span>
       </div>
