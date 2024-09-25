@@ -116,7 +116,8 @@ export default function MessengerUI({ data }) {
               key={message.id}
               className={`flex flex-col gap-4 ${
                 message.sent !== data.messages[index + 1]?.sent &&
-                !isPreviousAndCurrentOneMinuteApart
+                isPreviousAndCurrentOneMinuteApart &&
+                index !== data.messages.length - 1
                   ? "mb-4"
                   : ""
               }`}
