@@ -94,7 +94,7 @@ export default function Menu({ data, setData }) {
                     htmlFor="battery"
                     className="flex items-center text-white"
                   >
-                    <BatteryIcon className="mr-2" /> Battery
+                    <BatteryIcon className="mr-2 text-[#2DD4BF]" /> Battery
                   </Label>
                   <Label
                     htmlFor="maxBattery"
@@ -132,7 +132,7 @@ export default function Menu({ data, setData }) {
 
               <div className="space-y-2">
                 <Label htmlFor="time" className="flex items-center text-white">
-                  <Clock className="mr-2" />
+                  <Clock className="mr-2 text-[#2DD4BF]" />
                   Date & Time
                 </Label>
                 <div className="space-y-2">
@@ -144,7 +144,7 @@ export default function Menu({ data, setData }) {
 
               <div className="space-y-2">
                 <Label htmlFor="wifi" className="flex items-center text-white">
-                  <WifiIcon className="mr-2" /> Wi-Fi
+                  <WifiIcon className="mr-2 text-[#2DD4BF]" /> Wi-Fi
                 </Label>
                 <div className="flex items-center gap-2">
                   <Slider
@@ -170,7 +170,7 @@ export default function Menu({ data, setData }) {
                   htmlFor="cellular"
                   className="flex items-center text-white"
                 >
-                  <SignalIcon className="mr-2" /> Cellular
+                  <SignalIcon className="mr-2 text-[#2DD4BF]" /> Cellular
                 </Label>
                 <div className="flex items-center gap-2">
                   <Slider
