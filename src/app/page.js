@@ -7,6 +7,7 @@ import {
   Layout,
   Laugh,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const FeatureCard = ({ icon, title, description }) => {
@@ -151,13 +152,16 @@ export default function Home() {
           <h3 className="mb-4 text-center text-2xl font-bold">
             See FakePost in Action
           </h3>
-          <div className="mb-4 aspect-video rounded-lg bg-zinc-700">
-            {/* Replace this div with an actual video or animated GIF showcasing the app */}
-            <div className="flex h-full w-full items-center justify-center text-zinc-500">
-              App Demo Video/GIF
-            </div>
+          <div className="flex w-full justify-center">
+            <Image
+              className="w-full rounded-xl shadow-2xl shadow-zinc-700 md:w-[70%]"
+              src={"/fakepost-demo.gif"}
+              alt="Fakepost Demo"
+              width={500}
+              height={500}
+            />
           </div>
-          <p className="text-center text-zinc-400">
+          <p className="mt-6 text-center text-zinc-400">
             Watch how easy it is to create hilarious chat memes with FakePost
           </p>
         </section>
