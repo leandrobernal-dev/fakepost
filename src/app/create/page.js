@@ -79,7 +79,7 @@ export default function Home() {
             </Sheet>
           </div>
         </header>
-        <main className="flex h-full items-center justify-center p-2">
+        <main className="mt-7 flex h-full items-center justify-center p-2">
           <PreviewCanvas>
             <MessengerUI data={data} setData={setData} />
           </PreviewCanvas>
