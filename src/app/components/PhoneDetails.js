@@ -20,7 +20,7 @@ import {
 
 const Battery0 = () => (
   <svg
-    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-20bmp1-MuiSvgIcon-root w-4"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSize10px css-1y2zrd1-MuiSvgIcon-root"
     focusable="false"
     aria-hidden="true"
     viewBox="0 0 24 24"
@@ -70,24 +70,24 @@ export default function PhoneDetails({ phoneSettings }) {
             <SignalZero className="w-4" />
           )}
         </span>
-        <span className="flex items-end">
+        <span className="flex">
           <span className="text-xs leading-5">{phoneSettings.battery}%</span>
           {phoneSettings.battery >= 90 ? (
-            <BatteryFull className="w-4" />
+            <BatteryFull fontSize="10px" />
           ) : phoneSettings.battery >= 80 ? (
-            <Battery90 className="w-4" />
+            <Battery90 fontSize="10px" />
           ) : phoneSettings.battery >= 60 ? (
-            <Battery80 className="w-4" />
+            <Battery80 fontSize="10px" />
           ) : phoneSettings.battery >= 50 ? (
-            <Battery60 className="w-4" />
+            <Battery60 fontSize="10px" />
           ) : phoneSettings.battery >= 30 ? (
-            <Battery50 className="w-4" />
+            <Battery50 fontSize="10px" />
           ) : phoneSettings.battery >= 20 ? (
-            <Battery30 className="w-4" />
+            <Battery30 fontSize="10px" />
           ) : phoneSettings.battery > 0 ? (
-            <Battery20 className="w-4" />
+            <Battery20 fontSize="10px" />
           ) : (
-            <Battery0 className="w-4" />
+            <Battery0 fontSize="10px" />
           )}
         </span>
       </div>
