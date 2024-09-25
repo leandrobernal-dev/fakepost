@@ -41,6 +41,7 @@ export default function MessagesForm({ data, setData }) {
       time: "",
       reactions: [],
       text: "",
+      type: "text",
     };
     setData((prevState) => ({
       ...prevState,
