@@ -44,12 +44,7 @@ export default function Home() {
       <div className="custom-scrollbar fixed bottom-0 top-0 hidden overflow-auto lg:block lg:w-96 lg:shrink-0 lg:border-r">
         <div className="flex h-full flex-col justify-between px-4 py-6">
           <div>
-            <Link
-              href="#"
-              className="flex items-center gap-2 font-bold"
-              prefetch={false}
-            >
-              <MountainIcon className="h-6 w-6" />
+            <Link href="#" className="font-bold" prefetch={false}>
               <span className="text-lg">fakepost</span>
             </Link>
             <Menu data={data} setData={setData} />
