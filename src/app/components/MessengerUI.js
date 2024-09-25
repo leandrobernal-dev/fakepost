@@ -161,7 +161,11 @@ export default function MessengerUI({ data }) {
                   {message.replyTo && (
                     <>
                       {getMessageById(message.replyTo)?.type === "text" ? (
-                        <div className="z-0 max-h-20 max-w-[90%] translate-y-6 opacity-50">
+                        <div
+                          className={`z-0 flex max-h-20 w-full translate-y-6 flex-col opacity-50 ${
+                            message.sent ? "items-end" : "items-start"
+                          }`}
+                        >
                           <span className="mb-1 flex items-center gap-1 px-2 text-[10px]">
                             <ReplyRounded fontSize="12px" />
                             {message.sent
@@ -169,9 +173,13 @@ export default function MessengerUI({ data }) {
                               : `${data.contactDetails.receiverName} replied to you`}
                           </span>
                           <div
-                            className={`overflow-hidden text-ellipsis rounded-2xl bg-zinc-900 p-2 px-4 pb-8 text-sm`}
+                            className={`inline-block max-h-20 w-auto max-w-32 overflow-hidden text-ellipsis rounded-2xl bg-zinc-900 p-2 px-4 pb-8 text-sm`}
                           >
-                            {`${getMessageById(message.replyTo)?.text.slice(0, 50)}${getMessageById(message.replyTo)?.text.length > 50 ? "..." : ""}`}
+                            {`${getMessageById(message.replyTo)?.text.slice(0, 50)}${
+                              getMessageById(message.replyTo)?.text.length > 50
+                                ? "..."
+                                : ""
+                            }`}
                           </div>
                         </div>
                       ) : (
