@@ -55,14 +55,17 @@ export default function Home() {
     {
       name: "Facebook Messenger",
       image: "/messenger-logo.png",
+      available: true,
     },
     {
       name: "WhatsApp",
       image: "/whatsapp-logo.png",
+      available: false,
     },
     {
       name: "iMessage",
       image: "/imessage-logo.png",
+      available: false,
     },
   ];
 
@@ -101,7 +104,17 @@ export default function Home() {
           </h3>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {supportedApps.map((app) => (
-              <AppCard key={app.name} {...app} />
+              <div
+                key={app.name}
+                className="relative overflow-hidden rounded-lg bg-zinc-800 p-4"
+              >
+                <AppCard {...app} />
+                {!app.available && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-3xl font-bold text-white">
+                    Coming Soon...
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </section>
