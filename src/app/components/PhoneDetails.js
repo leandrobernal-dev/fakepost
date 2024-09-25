@@ -37,7 +37,7 @@ export default function PhoneDetails({ phoneSettings }) {
   return (
     <div className="flex items-center justify-between p-1 px-4 text-[#e4e6eb]">
       <div className="flex items-center">
-        <span className="mr-2 text-sm">
+        <span className="mr-2 text-xs">
           {phoneSettings.dateTime
             ?.toLocaleTimeString("en-US", {
               hour: "2-digit",
