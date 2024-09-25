@@ -5,7 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import { BatteryIcon, Clock, SignalIcon, WifiIcon } from "lucide-react";
+import {
+  BatteryIcon,
+  Clock,
+  Download,
+  SignalIcon,
+  WifiIcon,
+} from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -65,7 +71,12 @@ export default function Menu({ data, setData }) {
   };
 
   return (
-    <div className="custom-scrollbar space-y-2 pr-2">
+    <div className="custom-scrollbar mt-4 space-y-2 pr-2">
+      <Button onClick={captureImage} className="bg-zinc-800 shadow-sm">
+        <Download className="mr-2 h-4 w-4 text-[#2DD4BF]" />
+        Download Meme
+      </Button>
+
       <Accordion
         type="single"
         defaultValue={"device-status"}
@@ -307,7 +318,6 @@ export default function Menu({ data, setData }) {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <Button onClick={captureImage}>Download</Button>
     </div>
   );
 }
